@@ -1,0 +1,26 @@
+Musiclovr:
+- users
+  > id
+  > username
+  > password
+  > firstname
+  > lastname
+  > profile_image_id
+  > created
+
+- posts
+  > id
+  > headline
+  > body
+  > user_id
+  > file_id
+  > category_id
+  > created
+
+- categories
+  > id
+  > name
+  > description
+  > user_id
+  > created
+  
