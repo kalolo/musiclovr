@@ -9,19 +9,11 @@ class BaseController extends CI_Controller {
     private $_loggedUser = null;
     private $_arrJSpaths = array();
     private $_arrCSSPaths = array();
-    private $_strMetaTitle = '';
-    private $_strMetaDescription = '';
-    private $_strMetaKeywords = '';
-    
-    protected $_auth;
 
     public function  __construct() {
         parent::__construct();
         $this->load->library('session');
         $this->load->helper('url');
-        if (!$this->_checkAuth()) {
-            redirect('home/login','location');
-        }
         
         if ($this->_isUserLogged()) {
             $this->_addViewParam('is_logged', true);
@@ -29,17 +21,6 @@ class BaseController extends CI_Controller {
         } else {
             $this->_addViewParam('is_logged', false);
         }
-    }
-    
-    protected function _checkAuth() {
-        if (isset($this->_auth)) {
-            if ($this->_isUserLogged() && 
-                    in_array($this->_getLoggedUser()->role_id, $this->_auth['role_id'])) {
-                return true;
-            }
-            return false;
-        }
-        return true;
     }
 
     protected function _isUserLogged() {
