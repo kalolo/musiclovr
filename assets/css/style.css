@@ -41,7 +41,7 @@ table {
 body {
 	font-family:'Droid Sans', arial, sans-serif;
 	color: #333;
-	background: #eee url(images/spiderweb.png) right bottom no-repeat fixed;
+	background: #eee url(../img/spiderweb.png) right bottom no-repeat fixed;
 }
 #wrap {
 	width: 960px;
@@ -225,7 +225,7 @@ ul.sidebar h3.widget-title {
 	height: 0;
 	padding-top: 200px;
 	display: block;
-	background: #333 url(images/logo.gif) no-repeat;
+	background: #333 url(../img/logo.gif) no-repeat;
 }
 
 #sidebar-primary .logo h1 a:hover {
@@ -339,31 +339,31 @@ ul.sidebar li.widget_sociallinks a {
 	line-height:23px;
 }
 ul.sidebar li.widget_sociallinks a.rss {
-	background:url(images/rss-icon.png) 0 0 no-repeat;
+	background:url(../img/rss-icon.png) 0 0 no-repeat;
 }
 ul.sidebar li.widget_sociallinks a.twitter {
-	background:url(images/twitter-icon.png) 0 0 no-repeat;
+	background:url(../img/twitter-icon.png) 0 0 no-repeat;
 }
 ul.sidebar li.widget_sociallinks a.facebook {
-	background:url(images/fb-icon.png) 0 0 no-repeat;
+	background:url(../img/fb-icon.png) 0 0 no-repeat;
 }
 ul.sidebar li.widget_sociallinks a.googleplus {
-	background:url(images/googleplus-icon.png) 0 0 no-repeat;
+	background:url(../img/googleplus-icon.png) 0 0 no-repeat;
 }
 ul.sidebar li.widget_sociallinks a.flickr {
-	background:url(images/flickr-icon.png) 0 0 no-repeat;
+	background:url(../img/flickr-icon.png) 0 0 no-repeat;
 }
 ul.sidebar li.widget_sociallinks a.vimeo {
-	background:url(images/vimeo-icon.png) 0 0 no-repeat;
+	background:url(../img/vimeo-icon.png) 0 0 no-repeat;
 }
 ul.sidebar li.widget_sociallinks a.xing {
-	background:url(images/xing-icon.png) 0 0 no-repeat;
+	background:url(../img/xing-icon.png) 0 0 no-repeat;
 }
 ul.sidebar li.widget_sociallinks a.linkedin {
-	background:url(images/linkedin-icon.png) 0 0 no-repeat;
+	background:url(../img/linkedin-icon.png) 0 0 no-repeat;
 }
 ul.sidebar li.widget_sociallinks a.delicious {
-	background:url(images/delicious-icon.png) 0 0 no-repeat;
+	background:url(../img/delicious-icon.png) 0 0 no-repeat;
 }
 
 /* Posts
@@ -385,7 +385,7 @@ ul.sidebar li.widget_sociallinks a.delicious {
 #content blockquote {
 	margin:10px 0px 30px 0px;
 	padding:0px 0px 0px 16px;
-	background:url(images/blockquote-border.jpg) 0 0 repeat-y;
+	background:url(../img/blockquote-border.jpg) 0 0 repeat-y;
 	font-family:'Droid Serif',  Times, serif;
 	line-height:21px;
 	font-style:italic;
@@ -865,7 +865,7 @@ input.wpcf7-submit {
 		height: 100px;
 	}
 	#sidebar-primary .logo h1 a{
-		background: #333 url(images/logo.gif) no-repeat center center;
+		background: #333 url(../img/logo.gif) no-repeat center center;
 		background-size: 115px 100px;
 		padding-top: 100px;
 	}

@@ -27,7 +27,7 @@
             <div id="sidebar-primary" class="block">
 
                 <div class="logo">
-                    <h1><a href="<?php echo base_url(); ?>/" title="Music Lovr">Music Lovr</a></h1><p>Una comunidad de amantes de la música</p>
+                    <h1><a href="<?php echo base_url(); ?>" title="Music Lovr">Music Lovr</a></h1><p>Una comunidad de amantes de la música</p>
                 </div><!--end Logo-->
 
 
