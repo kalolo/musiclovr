@@ -3,11 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Home extends BaseController {
-    
-    protected $_auth = array(
-        'role_id' => array(ROLE_COMPA, ROLE_MACIZO)
-    );
+class Admin extends BaseController {
 
     public function index() {
         $this->_loadView("home");

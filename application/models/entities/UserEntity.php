@@ -1,6 +1,5 @@
 <?php
 require_once 'UserRoleEntity.php';
-require_once 'UserInfoEntity.php';
 
 class UserEntity {
 
@@ -10,11 +9,8 @@ class UserEntity {
     private $_strFirstname;
     private $_strLastname;
     private $_oUserRole;
-    private $_numStatus;
-    private $_strDateCreated;
-
-    private $_oUserInfo = null;
-    private $_oMemberSHip = null;
+    private $_numProfileImageId;
+    private $_strCreated;
     
     public function __construct() {
         
@@ -96,42 +92,23 @@ class UserEntity {
         return $this->_strLastname;
     }
 
-    public function getStatus() {
-        return $this->_numStatus;
+    public function getProfileImageId() {
+        return $this->_numProfileImageId;
     }
 
-    public function setStatus($status) {
-        $this->_numStatus = $status;
+    public function setProfileImageId($value) {
+        $this->_numProfileImageId = $value;
     }
 
-    public function getCreatedDate() {
-        return $this->_strDateCreated;
+    public function getCreated() {
+        return $this->_strCreated;
     }
 
-    public function setCreatedDate($date) {
-        $this->_strDateCreated = $date;
-    }
-
-    public function getUserInfo() {
-        if($this->_oUserInfo == null) {
-            $this->_oUserInfo = new UserInfoEntity();
-        }
-        return $this->_oUserInfo;
-    }
-
-    public function setUserInfo(UserInfoEntity $oUInf) {
-        $this->_oUserInfo = $oUInf;
+    public function setCreated($date) {
+        $this->_strCreated = $date;
     }
 
     public function getFullName() {
         return $this->_strFirstname." ".$this->_strLastname;
-    }
-    
-    public function addMemberShip(UserMembershipEntity $oObj) {
-        $this->_oMemberSHip = $oObj;
-    }
-    
-    public function getMemberShip() {
-        return $this->_oMemberSHip;
     }
 }

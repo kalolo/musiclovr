@@ -15,6 +15,10 @@ class BaseController extends CI_Controller {
         $this->load->library('session');
         $this->load->helper('url');
         
+        if (!$this->_checkAuth()) {
+            redirect(base_url().'login', 'location');
+        }
+        
         if ($this->_isUserLogged()) {
             $this->_addViewParam('is_logged', true);
             $this->_addViewParam('logged_user', $this->_getLoggedUser());
@@ -22,17 +26,33 @@ class BaseController extends CI_Controller {
             $this->_addViewParam('is_logged', false);
         }
     }
-
+    
+    protected function _checkAuth() {
+        if (isset($this->_auth)) {
+            if ($this->_isUserLogged() && 
+                    in_array($this->_getLoggedUser()->role_id, $this->_auth['role_id'])) {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+    
+    protected function _log($msg, $lvl='debug') {
+        error_log($msg);
+    }
+    
     protected function _isUserLogged() {
+        $this->_log(__METHOD__, 'debug');
         return $this->session->userdata('is_logged');
     }
 
     protected function _setLoggedUser($oUser) {
         $this->session->set_userdata('is_logged', true);
         $this->session->set_userdata('logged_user', $oUser);
+        $this->_loggedUser = $oUser;
         $this->_addViewParam('is_logged', true);
         $this->_addViewParam('logged_user', $this->_getLoggedUser());
-        $this->_loggedUser = $oUser;
     }
     
     protected function _getLoggedUser() {
@@ -96,8 +116,12 @@ class BaseController extends CI_Controller {
     	$layoutData['arrJs']          = $this->_arrJSpaths;
     	$layoutData['arrCss']         = $this->_arrCSSPaths;
     	$layoutData['oLoggedUser']    = $this->_getLoggedUser();        
-    	$layoutData['strContentView'] = $this->load->view($strView, $this->_viewParams, true);
-    	$this->load->view('layouts/' . $strLayout, $layoutData);
+        if ($strLayout == 'ajax') {
+            $this->load->view($strView, $this->_viewParams);
+        } else {
+    	    $layoutData['strContentView'] = $this->load->view($strView, $this->_viewParams, true);
+    	    $this->load->view('layouts/' . $strLayout, $layoutData);
+        }
     }
 
 }

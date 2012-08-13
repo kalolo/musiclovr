@@ -13,9 +13,21 @@ Musiclovr:
   > headline
   > body
   > user_id
-  > file_id
+  > song_id
   > category_id
   > created
+
+- songs
+  > id
+  > filename
+  > user_id
+  > created
+
+- current_category
+  > id
+  > category_id
+  > starts
+  > end
 
 - categories
   > id
