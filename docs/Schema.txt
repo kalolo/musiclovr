@@ -6,6 +6,7 @@ Musiclovr:
   > firstname
   > lastname
   > profile_image_id
+  > slug
   > created
 
 - posts
@@ -15,6 +16,7 @@ Musiclovr:
   > user_id
   > song_id
   > category_id
+  > slug
   > created
 
 - songs
@@ -34,5 +36,6 @@ Musiclovr:
   > name
   > description
   > user_id
+  > slug
   > created
   
