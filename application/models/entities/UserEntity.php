@@ -11,6 +11,7 @@ class UserEntity {
     private $_oUserRole;
     private $_numProfileImageId;
     private $_strCreated;
+    private $_strSlug;
     
     public function __construct() {
         
@@ -106,6 +107,14 @@ class UserEntity {
 
     public function setCreated($date) {
         $this->_strCreated = $date;
+    }
+    
+    public function setSlug($value) {
+        $this->_strSlug = $value;
+    }
+    
+    public function getSlug() {
+        return $this->_strSlug;
     }
 
     public function getFullName() {

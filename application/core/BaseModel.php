@@ -18,4 +18,9 @@ class BaseModel extends CI_Model {
         $query = $this->db->get($strTable, 10);
         return $query->result();
     }
+    
+    protected function _udpate($strTable, $numRecordId, $arrData) {
+        $this->db->where('id', $numRecordId);
+        $this->db->update($strTable, $arrData);
+    }
 }

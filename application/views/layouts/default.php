@@ -37,6 +37,8 @@
                             <div class="menu-sidebar-container">
                                 <ul id="menu-sidebar" class="menu">
                                     <li id="menu-item-14" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14"><?php echo $logged_user->firstname." ".$logged_user->lastname; ?></li>
+                                    <li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20"><a href="<?php echo base_url(); ?>home/add_new_song">Agregar rola</a></li>
+                                    <li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20"><a href="<?php echo base_url(); ?>home/add_category">Nueva categoria</a></li>
                                     <li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20"><a href="<?php echo base_url(); ?>logout/">Salir!</a></li>
                                 </ul>
                             </div>
