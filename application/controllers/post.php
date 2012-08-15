@@ -13,7 +13,7 @@ class Post extends BaseController {
             redirect(base_url().'home', 'location');
         }
         $this->_addViewParam('oPost', $oPost);
-        $this->_loadView('posts/view');
+        $this->_loadView('posts/full_view');
     }
 
 }

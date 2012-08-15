@@ -4,3 +4,8 @@
         <p><?php echo $oCategory->getDescription(); ?></p>
     </p>
 </div>
+<?php
+    foreach ($arrPosts as $oPost) {
+        include 'posts/view.php';
+    }
+?>

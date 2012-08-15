@@ -38,8 +38,8 @@ class PostEntity {
         return $this->_numCategoryId;
     }
     
-    public function setHeadline() {
-        $this->_strHeadline;
+    public function setHeadline($val) {
+        $this->_strHeadline = $val;
     }
     
     public function getHeadline() {

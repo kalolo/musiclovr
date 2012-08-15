@@ -33,7 +33,7 @@ class Categories extends BaseModel {
     public function add($numUserId, $strName, $strDescription) {
         $strSlug = Utils::slugger($strName);
         if ($this->slugExist($strSlug)) {
-            $strSlug .= date('Y-m-d');
+            $strSlug .= '-'.date('Y-m-d');
         }
         $this->db->insert('categories', array(
                 'name'        => $strName,
@@ -67,7 +67,7 @@ class Categories extends BaseModel {
     
     public function getActiveCategory() {
         $oCat = null;
-        $arrData = $this->query("SELECT Category.*, CurrentCategory.*
+        $arrData = $this->query("SELECT Category.*, CurrentCategory.ends, CurrentCategory.starts
             FROM current_category CurrentCategory
             INNER JOIN categories Category ON Category.id = CurrentCategory.category_id
             WHERE CurrentCategory.ends >= NOW() 
@@ -91,7 +91,7 @@ class Categories extends BaseModel {
     
     public function lastActiveCategory() {
         $oCat = null;
-        $arrData = $this->query("SELECT Category.*, CurrentCategory.*
+        $arrData = $this->query("SELECT Category.*, CurrentCategory.ends, CurrentCategory.starts
             FROM current_category CurrentCategory
             INNER JOIN categories Category ON Category.id = CurrentCategory.category_id
             ORDER BY CurrentCategory.id DESC
