@@ -29,6 +29,26 @@ class Categories extends BaseModel {
         }
         return $arrCategories;
     }
+    
+    public function getActivatedOnes() {
+        $arrCategories = array();
+        $this->db->select('categories.*');
+        $this->db->from('categories');
+        $this->db->join('current_category',
+                'current_category.category_id = categories.id',
+                'left'
+        );
+        $this->db->order_by('current_category.ends','DESC');
+        $this->db->group_by('categories.id');
+        $result = $this->db->get();
+        if ($result->num_rows > 0) {
+            $arrRows = $result->result();
+            foreach ($arrRows as $oRow) {
+                $arrCategories[] = $this->_getFromDBRecord($oRow);
+            }
+        }
+        return $arrCategories;
+    }
 
     public function add($numUserId, $strName, $strDescription) {
         $strSlug = Utils::slugger($strName);
@@ -115,7 +135,6 @@ class Categories extends BaseModel {
             $oCat->setStarts($oRow->starts);
             $oCat->setEnds($oRow->ends);
         }
-        
         if (isset($oRow->user_username)) {
             $oUser = new UserEntity();
             $oUser->setUsername($oRow->user_username);

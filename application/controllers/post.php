@@ -4,6 +4,10 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Post extends BaseController {
+    
+    protected $_auth = array(
+        'role_id' => array(ROLE_COMPA, ROLE_MACIZO)
+    );
 
     public function view($strHeadline) {
         $strSlug = str_replace(array('.html','/'),'', $strHeadline);

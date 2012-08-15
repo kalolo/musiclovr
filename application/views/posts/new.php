@@ -10,7 +10,7 @@
         <form id="frm_new_post" action="" method="POST">
             <p>Titulo:<input type="text" value="" name="headline" /></p>
             <p>
-                <textarea id="text_area_post_body" name="post_body" style="width: 100%; height: 100px;">
+                <textarea id="text_area_post_body" name="post_body" style="width: 100%; height: 200px;">
                 ...
                 </textarea>
             </p>

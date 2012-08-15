@@ -4,6 +4,10 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Categoria extends BaseController {
+    
+    protected $_auth = array(
+        'role_id' => array(ROLE_COMPA, ROLE_MACIZO)
+    );
 
     public function view($strCategory) {
         

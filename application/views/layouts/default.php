@@ -48,9 +48,10 @@
 
                     <li id="categories-2" class="widget-container widget_categories"><h3 class="widget-title">Temas:</h3>		<ul>
                             
-                            <?php foreach ($arrCategories as $oCat) { 
+                            <?php foreach ($arrActiveCategories as $oCat) { 
                                 echo '<li class="cat-item cat-item-10">
-                                         <a href="'.base_url().'categoria/'.$oCat->getSlug().'.html" title="'.$oCat->getDescription().'">'.$oCat->getName()."</a></li>\n";
+                                         <a href="'.base_url().'categoria/'.$oCat->getSlug().'.html" title="'.$oCat->getDescription().'">'.$oCat->getName()."</a>
+                                      </li>\n";
                              } 
                              ?>
                         </ul>

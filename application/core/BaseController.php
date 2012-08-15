@@ -28,8 +28,11 @@ class BaseController extends CI_Controller {
         }
         
         $this->load->model('categories');
-        $arrCategories = $this->categories->getAll();
-        $this->_addViewParam('arrCategories', $arrCategories);
+        // Load All categories
+        //$arrCategories = $this->categories->getAll();
+        // We should load categories that got activated.
+        $arrActiveCategories = $this->categories->getActivatedOnes();
+        $this->_addViewParam('arrActiveCategories', $arrActiveCategories);
     }
     
     protected function _checkAuth() {

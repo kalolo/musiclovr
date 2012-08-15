@@ -8,6 +8,6 @@
     </div>
     <p>SONG</p>
     <p class="meta">	
-        <a href="<?php echo base_url(); ?>/post/<?php echo $oPost->getSlug(); ?>#respond">Dejar comentario</a>
+        <a href="<?php echo base_url(); ?>post/<?php echo $oPost->getSlug(); ?>#respond">Dejar comentario</a>
     </p>
 </div>

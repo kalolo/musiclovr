@@ -47,7 +47,7 @@ class Script extends CI_Controller {
             echo ">> Random.... ";
             $id  = array_rand($arrToUse);
             echo "cat:".$arrToUse[$id]."\n";
-            $this->Categories->setActive($id, 7);
+            $this->categories->setActive($id, 7);
         } else {
             echo ">> Todas las categorias ya fueron usadas...\n";
         }

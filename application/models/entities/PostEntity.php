@@ -9,10 +9,12 @@ class PostEntity {
     private $_strSlug;
     private $_numSongId;
     
-    private $_oSong;
-    private $_oCategory;
-    private $_oUser;
-    private $_arrComments;
+    private $_oSong       = null;
+    private $_oCategory   = null;
+    private $_oUser       = null;
+    private $_arrComments = null;
+    
+    private $_numTotalCommens = null;
     
     public function setId($val) {
         $this->_numId = $val;
@@ -92,5 +94,30 @@ class PostEntity {
     
     public function getCategory() {
         return $this->_oCategory;
+    }
+    
+    public function setTotalComments($total) {
+        $this->_numTotalCommens = $total;
+    }
+    
+    public function getComments() {
+        return $this->_arrComments;
+    }
+    
+    public function setComments($arrComments) {
+        $this->_arrComments = $arrComments;
+    }
+    
+    public function addComment(CommentEntity $oComment) {
+        $this->_arrComments[] = $oComment;
+    }
+    
+    public function getTotalComments() {
+        if (is_array($this->_arrComments)) {
+            return count($this->_arrComments);
+        }
+        if ($this->_numTotalCommens != null) {
+            return $this->_numTotalCommens;
+        }
     }
 }

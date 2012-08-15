@@ -120,4 +120,8 @@ class UserEntity {
     public function getFullName() {
         return $this->_strFirstname." ".$this->_strLastname;
     }
+    
+    public function getProfileImageUrl() {
+        return base_url().'assets/img/default.png';
+    }
 }

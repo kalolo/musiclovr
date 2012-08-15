@@ -10,8 +10,17 @@ class Home extends BaseController {
     );
 
     public function index() {
+        $this->load->model('posts');
+        $arrPosts       = array();
+        $oLastActiveCat = null;
         $oLastActiveCat = $this->categories->lastActiveCategory();
+        if (null != $oLastActiveCat) {
+            $arrPosts = $this->posts->getByCategory(
+                $oLastActiveCat->getId()
+            );
+        }
         $this->_addViewParam('oLastActiveCat', $oLastActiveCat);
+        $this->_addViewParam('arrPosts', $arrPosts);
         $this->_loadView("home");
     }
     
@@ -28,6 +37,8 @@ class Home extends BaseController {
             }
             redirect(base_url().'home/add_category', 'location');
         }
+        $arrCategories = $this->categories->getAll();
+        $this->_addViewParam('arrCategories', $arrCategories);
         $this->_loadView('home/add_category');   
     }
     
