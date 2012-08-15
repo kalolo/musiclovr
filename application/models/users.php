@@ -22,7 +22,56 @@ class Users extends BaseModel {
     }
 
     public function getAll() {
-        return $this->_getAll($this->table);
+        $arrUsers = array();
+        $arrData  = $this->_getAll($this->table);
+        foreach ($arrData as $row) {
+            $arrUsers[] = $this->_buildFromResultSet($row);
+        }
+        return $arrUsers;
+    }
+    
+    public function getSystemUser() {
+        $this->db->select('*');
+        $this->db->where('role_id', ROLE_SYSTEM);
+        $result = $this->db->get('users');
+        if ($result->num_rows > 0) {
+            $arrUser = $result->result();
+            return $this->_buildFromResultSet($arrUser[0]);
+        }
+        return null;
+    }
+    
+    public function getById($numUserId) {
+        $this->db->select('*');
+        $this->db->where('id', $numUserId);
+        $result = $this->db->get('users');
+        if ($result->num_rows > 0) {
+            $arrUser = $result->result();
+            return $this->_buildFromResultSet($arrUser[0]);
+        }
+        return null;
+    }
+    
+    public function udpateUserSlug($numUserId) {
+        $oUser = $this->getById($numUserId);
+        if ($oUser != null) {
+            $strSlug = Utils::slugger($oUser->getFullName());
+            if ($this->slugExist($strSlug)) {
+                $strSlug .= '-' . date('Y-m-d');
+            }
+            $this->db->where('id', $numUserId);
+            $this->db->update('users', array(
+                'slug' => $strSlug,
+            )
+            );
+        }
+    }
+    
+    public function slugExist($strSlug) {
+        $this->db->select('*');
+        $this->db->where('slug', $strSlug);
+        $result = $this->db->get('posts');
+        return ($result->num_rows > 0);
     }
     
     private function _buildFromResultSet($resultSet) {

@@ -41,3 +41,4 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 /* Location: ./application/config/constants.php */
 define('ROLE_COMPA', 1);
 define('ROLE_MACIZO', 2);
+define('ROLE_SYSTEM', 3);

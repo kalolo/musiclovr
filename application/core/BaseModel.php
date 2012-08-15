@@ -18,7 +18,7 @@ class BaseModel extends CI_Model {
     }
 
     protected function _getAll($strTable) {
-        $query = $this->db->get($strTable, 10);
+        $query = $this->db->get($strTable);
         return $query->result();
     }
     
