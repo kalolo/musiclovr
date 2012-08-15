@@ -26,6 +26,10 @@ class BaseController extends CI_Controller {
         } else {
             $this->_addViewParam('is_logged', false);
         }
+        
+        $this->load->model('Categories');
+        $arrCategories = $this->Categories->getAll();
+        $this->_addViewParam('arrCategories', $arrCategories);
     }
     
     protected function _checkAuth() {

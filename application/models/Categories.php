@@ -89,6 +89,18 @@ class Categories extends BaseModel {
         );
     }
     
+    public function lastActiveCategory() {
+        $oCat = null;
+        $arrData = $this->query("SELECT Category.*, CurrentCategory.*
+            FROM current_category CurrentCategory
+            INNER JOIN categories Category ON Category.id = CurrentCategory.category_id
+            ORDER BY CurrentCategory.id DESC
+            LIMIT 1");
+        if (!empty($arrData)) {
+            $oCat =  $this->_getFromDBRecord($arrData[0]);
+        }
+        return $oCat;
+    }
     
     private function _getFromDBRecord($oRow) {
         $oCat = new CategoryEntity();

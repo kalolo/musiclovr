@@ -13,8 +13,6 @@ class Categoria extends BaseController {
         if ($oCategory == null) {
             redirect(base_url().'home', 'location');
         }
-        $arrCategories = $this->Categories->getAll();
-        $this->_addViewParam('arrCategories', $arrCategories);
         $this->_addViewParam('oCategory', $oCategory);
         $this->_loadView('category');
     }

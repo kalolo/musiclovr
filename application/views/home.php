@@ -1,8 +1,8 @@
 <div class="home-cat-desc block">
-    <?php if (isset($oActiveCategory)) { ?>
-        <h3>Tema en curso: <?php echo $oActiveCategory->getName(); ?></h3>
+    <?php if (isset($oLastActiveCat)) { ?>
+        <h3><?php echo $oLastActiveCat->getName(); ?></h3>
         <p>
-        <p><?php echo $oActiveCategory->getDescription(); ?></p>
+        <p><?php echo $oLastActiveCat->getDescription(); ?></p>
     </p>
 <?php } ?>
 </div>

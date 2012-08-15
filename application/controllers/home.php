@@ -10,16 +10,12 @@ class Home extends BaseController {
     );
 
     public function index() {
-        $this->load->model('Categories');
-        $arrCategories   = $this->Categories->getAll();
-        $oActiveCategory = $this->Categories->getActiveCategory();
-        $this->_addViewParam('oActiveCategory', $oActiveCategory);
-        $this->_addViewParam('arrCategories', $arrCategories);
+        $oLastActiveCat = $this->Categories->lastActiveCategory();
+        $this->_addViewParam('oLastActiveCat', $oLastActiveCat);
         $this->_loadView("home");
     }
     
     public function add_category() {
-        $this->load->model('Categories');
         if ($this->input->post('btn_add')) {
             $strName        = trim($this->input->post('category_name'));
             $strDescription = trim($this->input->post('category_description'));
@@ -30,16 +26,16 @@ class Home extends BaseController {
                         $strDescription
                 );
             }
+            redirect(base_url().'home/add_category', 'location');
         }
-        
-        $arrCategories = $this->Categories->getAll();
-        $this->_addViewParam('arrCategories', $arrCategories);
         $this->_loadView('home/add_category');   
     }
     
-    public function add_new_song() {
-        $this->load->model('Categories');
-        $arrCategories = $this->Categories->getAll();
-        $this->_addViewParam('arrCategories', $arrCategories);
+    public function new_post() {
+        
+        $oActiveCategory = $this->Categories->getActiveCategory();
+        $this->_addViewParam('oActiveCategory', $oActiveCategory);
+        
+        $this->_loadView('posts/new');
     }
 }
