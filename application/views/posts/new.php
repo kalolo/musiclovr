@@ -1,4 +1,9 @@
 <?php if (null != $oActiveCategory) { ?>
+ <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script> <script type="text/javascript">
+//<![CDATA[
+        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+  //]]>
+  </script>
 <div class="home-cat-desc block">
     <h3>Tema en curso: <?php echo $oActiveCategory->getName(); ?></h3>
     <p>
@@ -10,7 +15,7 @@
         <form id="frm_new_post" action="" method="POST">
             <p>Titulo:<input type="text" value="" name="headline" /></p>
             <p>
-                <textarea name="post_body" rows="20" cols="90">Descripción...</textarea>
+                <textarea name="post_body" style="width: 100%; height: 100px;">Descripción...</textarea>
             </p>
             <h4>Canción</h4><input type="file" name="song" />
             <br /><br />

@@ -7,7 +7,7 @@ class Post extends BaseController {
 
     public function view($strHeadline) {
         $strSlug = str_replace(array('.html','/'),'', $strHeadline);
-        $this->load->model('Posts');
+        $this->load->model('posts');
         $oPost = $this->Posts->getBySlug($strSlug);
         if ($oPost == null) {
             redirect(base_url().'home', 'location');

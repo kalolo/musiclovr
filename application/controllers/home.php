@@ -40,7 +40,7 @@ class Home extends BaseController {
             $strHeadline = $this->input->post('headline');
             $strBody     = $this->input->post('post_body');
             
-            $this->load->model('Posts');
+            $this->load->model('posts');
             $strSlug = $this->Posts->add($this->_getLoggedUser()->id, $strHeadline, $strBody, $oActiveCategory->getId(), 0);
             redirect(base_url().'post/'.$strSlug.'.html');
         }
