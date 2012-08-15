@@ -27,8 +27,8 @@ class BaseController extends CI_Controller {
             $this->_addViewParam('is_logged', false);
         }
         
-        $this->load->model('Categories');
-        $arrCategories = $this->Categories->getAll();
+        $this->load->model('categories');
+        $arrCategories = $this->categories->getAll();
         $this->_addViewParam('arrCategories', $arrCategories);
     }
     

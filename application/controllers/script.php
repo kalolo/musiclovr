@@ -12,14 +12,14 @@ class Script extends CI_Controller {
         $this->load->library('utils');
         $this->load->helper('url');
         $this->load->model('users');
-        $this->load->model('Categories');
+        $this->load->model('categories');
                 
         $this->_systemUser = $this->users->getSystemUser();
     }
     
     public function pick_new_category() {
         // Primermos nos traemos todas las categorias
-        $arrData = $this->Categories->query("SELECT id,name FROM categories");
+        $arrData = $this->categories->query("SELECT id,name FROM categories");
         $arrCategories = array();
         echo ">> Categorias disponibles:\n";
         foreach ($arrData as $oCat) {
@@ -29,7 +29,7 @@ class Script extends CI_Controller {
         
         // Ahora sacamos las categorias que ya han estado activas, hacemos un merge
         // y las que queden, tomamos una random de ahi para activarla :)
-        $arrData = $this->Categories->query("SELECT cat.id,cat.name FROM categories cat 
+        $arrData = $this->categories->query("SELECT cat.id,cat.name FROM categories cat 
             INNER JOIN current_category cc ON cc.category_id = cat.id
             GROUP BY cat.id");
         $arrUsedOnes = array();
@@ -52,7 +52,7 @@ class Script extends CI_Controller {
             echo ">> Todas las categorias ya fueron usadas...\n";
         }
         
-        $oActiveCat = $this->Categories->getActiveCategory();
+        $oActiveCat = $this->categories->getActiveCategory();
         echo "> Active Category: ".$oActiveCat->getName()." Termina: ".$oActiveCat->getEnds()."\n";
         exit;
     }

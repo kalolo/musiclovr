@@ -10,7 +10,7 @@ class Home extends BaseController {
     );
 
     public function index() {
-        $oLastActiveCat = $this->Categories->lastActiveCategory();
+        $oLastActiveCat = $this->categories->lastActiveCategory();
         $this->_addViewParam('oLastActiveCat', $oLastActiveCat);
         $this->_loadView("home");
     }
@@ -20,7 +20,7 @@ class Home extends BaseController {
             $strName        = trim($this->input->post('category_name'));
             $strDescription = trim($this->input->post('category_description'));
             if (!empty($strName)) {
-                $this->Categories->add(
+                $this->categories->add(
                         $this->_getLoggedUser()->id, 
                         $strName, 
                         $strDescription
@@ -33,7 +33,7 @@ class Home extends BaseController {
     
     public function new_post() {
         
-        $oActiveCategory = $this->Categories->getActiveCategory();
+        $oActiveCategory = $this->categories->getActiveCategory();
         $this->_addViewParam('oActiveCategory', $oActiveCategory);
         
         if ($this->input->post('add_post') && $oActiveCategory != null) {
@@ -41,10 +41,9 @@ class Home extends BaseController {
             $strBody     = $this->input->post('post_body');
             
             $this->load->model('posts');
-            $strSlug = $this->Posts->add($this->_getLoggedUser()->id, $strHeadline, $strBody, $oActiveCategory->getId(), 0);
+            $strSlug = $this->posts->add($this->_getLoggedUser()->id, $strHeadline, $strBody, $oActiveCategory->getId(), 0);
             redirect(base_url().'post/'.$strSlug.'.html');
         }
-        
         $this->_loadView('posts/new');
     }
 }

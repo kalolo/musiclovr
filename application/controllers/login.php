@@ -13,8 +13,8 @@ class Login extends BaseController {
             $strUserName = trim($this->input->post('lgn_username'));
             $strPassword = trim($this->input->post('lgn_password'));
             if (!empty($strUserName) && !empty($strPassword)) {
-                $this->load->model('Users');
-                $oUser = $this->Users->getByCredentials($strUserName, $strPassword);
+                $this->load->model('users');
+                $oUser = $this->users->getByCredentials($strUserName, $strPassword);
                 if ($oUser) {
                     $this->_setLoggedUser($oUser);
                     redirect(base_url().'home/', 'location');

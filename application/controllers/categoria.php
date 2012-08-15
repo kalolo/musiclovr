@@ -8,13 +8,13 @@ class Categoria extends BaseController {
     public function view($strCategory) {
         
         $strCategorySlug = str_replace(array('.html','/'),'', $strCategory);
-        $this->load->model('Categories');
-        $oCategory = $this->Categories->getBySlug($strCategorySlug);
+        $this->load->model('categories');
+        $oCategory = $this->categories->getBySlug($strCategorySlug);
         if ($oCategory == null) {
             redirect(base_url().'home', 'location');
         }
-        $this->load->model('Posts');
-        $arrPosts = $this->Posts->getByCategory($oCategory->getId());
+        $this->load->model('posts');
+        $arrPosts = $this->posts->getByCategory($oCategory->getId());
         
         $this->_addViewParam('arrPosts', $arrPosts);
         $this->_addViewParam('oCategory', $oCategory);

@@ -10,23 +10,23 @@ class Admin extends BaseController {
     );
 
     public function index() {
-        $this->load->model('Categories');
+        $this->load->model('categories');
         
-        $arrCategories = $this->Categories->getAll();
+        $arrCategories = $this->categories->getAll();
         $this->_addViewParam('arrCategories', $arrCategories);
         $this->_loadView("home");
     }
     
     public function active_category() {
-        $this->load->model('Categories');
+        $this->load->model('categories');
         
         if ($this->input->post('category')) {
             $numCategory = (int)$this->input->post('category');
             $numDays     = (int)$this->input->post('active_days');
-            $this->Categories->setActive($numCategory, $numDays);
+            $this->categories->setActive($numCategory, $numDays);
         }
         
-        $arrCategories = $this->Categories->getAll();
+        $arrCategories = $this->categories->getAll();
         $this->_addViewParam('arrCategories', $arrCategories);
         $this->_loadView('admin/active_category');
     }
