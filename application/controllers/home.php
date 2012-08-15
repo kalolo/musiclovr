@@ -36,6 +36,15 @@ class Home extends BaseController {
         $oActiveCategory = $this->Categories->getActiveCategory();
         $this->_addViewParam('oActiveCategory', $oActiveCategory);
         
+        if ($this->input->post('add_post') && $oActiveCategory != null) {
+            $strHeadline = $this->input->post('headline');
+            $strBody     = $this->input->post('post_body');
+            
+            $this->load->model('Posts');
+            $strSlug = $this->Posts->add($this->_getLoggedUser()->id, $strHeadline, $strBody, $oActiveCategory->getId(), 0);
+            redirect(base_url().'post/'.$strSlug.'.html');
+        }
+        
         $this->_loadView('posts/new');
     }
 }

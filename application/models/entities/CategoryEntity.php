@@ -1,5 +1,6 @@
 <?php
 require_once 'UserEntity.php';
+
 class CategoryEntity {
     
     private $_numId;
