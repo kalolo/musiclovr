@@ -49,7 +49,7 @@
                             
                             <?php foreach ($arrCategories as $oCat) { 
                                 echo '<li class="cat-item cat-item-10">
-                                         <a href="'.base_url().'/temas/'.$oCat->getSlug().'/" title="'.$oCat->getDescription().'">'.$oCat->getName()."</a></li>\n";
+                                         <a href="'.base_url().'categoria/'.$oCat->getSlug().'.html" title="'.$oCat->getDescription().'">'.$oCat->getName()."</a></li>\n";
                              } 
                              ?>
                         </ul>
@@ -63,14 +63,6 @@
             <div id="main">
 
                 <div id="content">
-                    <div class="home-cat-desc block">
-                        <?php if (isset($oActiveCategory)) { ?>
-                            <h3>Tema en curso: <?php echo $oActiveCategory->getName(); ?></h3>
-                            <p>
-                                <p><?php echo $oActiveCategory->getDescription(); ?></p>
-                            </p>
-                    <?php } ?>
-                     </div>
                     <?php echo $strContentView; ?>
                 </div>
                 <!--end Content-->

@@ -46,6 +46,18 @@ class Categories extends BaseModel {
         return $this->db->insert_id();
     }
     
+    public function getBySlug($strSlug) {
+        $oCat = null;
+        $this->db->select('*');
+        $this->db->where('slug', $strSlug);
+        $result = $this->db->get('categories');
+        if ($result->num_rows > 0) {
+            $arrRows = $result->result();
+            $oCat =  $this->_getFromDBRecord($arrRows[0]);
+        }
+        return $oCat;
+    }
+    
     public function slugExist($strSlug) {
         $this->db->select('*');
         $this->db->where('slug', $strSlug);

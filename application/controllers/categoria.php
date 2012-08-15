@@ -6,9 +6,17 @@ if (!defined('BASEPATH'))
 class Categoria extends BaseController {
 
     public function view($strCategory) {
-        echo Utils::slugger("Carlos Lopez del a Rosa");
-        echo "<br/>";
-        echo $strCategory;exit;
+        
+        $strCategorySlug = str_replace(array('.html','/'),'', $strCategory);
+        $this->load->model('Categories');
+        $oCategory = $this->Categories->getBySlug($strCategorySlug);
+        if ($oCategory == null) {
+            redirect(base_url().'home', 'location');
+        }
+        $arrCategories = $this->Categories->getAll();
+        $this->_addViewParam('arrCategories', $arrCategories);
+        $this->_addViewParam('oCategory', $oCategory);
+        $this->_loadView('category');
     }
 
 }

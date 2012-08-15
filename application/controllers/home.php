@@ -11,7 +11,9 @@ class Home extends BaseController {
 
     public function index() {
         $this->load->model('Categories');
-        $arrCategories = $this->Categories->getAll();
+        $arrCategories   = $this->Categories->getAll();
+        $oActiveCategory = $this->Categories->getActiveCategory();
+        $this->_addViewParam('oActiveCategory', $oActiveCategory);
         $this->_addViewParam('arrCategories', $arrCategories);
         $this->_loadView("home");
     }

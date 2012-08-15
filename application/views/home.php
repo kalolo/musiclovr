@@ -1,3 +1,12 @@
+<div class="home-cat-desc block">
+    <?php if (isset($oActiveCategory)) { ?>
+        <h3>Tema en curso: <?php echo $oActiveCategory->getName(); ?></h3>
+        <p>
+        <p><?php echo $oActiveCategory->getDescription(); ?></p>
+    </p>
+<?php } ?>
+</div>
+
 <div id="post-510" class="post-510 post type-post status-publish format-standard hentry category-memoriasdeunaepoca block">
 
     <h2><span class="author">anita</span> <a href="<?php echo base_url(); ?>/jill-scott-a-long-walk/" title="Permalink to Jill Scott &#8211; A long walk" rel="bookmark">Jill Scott &#8211; A long walk</a></h2>

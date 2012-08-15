@@ -45,3 +45,4 @@ $route['404_override'] = '';
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
 $route['categoria/(:any)'] = "categoria/view/$1";
+$route['post/(:any)']      = "post/view/$1";
