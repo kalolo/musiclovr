@@ -1,7 +1,3 @@
-<div class="home-cat-desc block"><h3>Tema en curso: Memorias de una época</h3><p><p>Una rola que te recuerde una época o situación específica. Pónganse personales :)</p>
-</p></div>
-
-
 <div id="post-510" class="post-510 post type-post status-publish format-standard hentry category-memoriasdeunaepoca block">
 
     <h2><span class="author">anita</span> <a href="<?php echo base_url(); ?>/jill-scott-a-long-walk/" title="Permalink to Jill Scott &#8211; A long walk" rel="bookmark">Jill Scott &#8211; A long walk</a></h2>

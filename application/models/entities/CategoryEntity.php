@@ -11,6 +11,10 @@ class CategoryEntity {
     
     private $_oUser;
     
+    //Active category info
+    private $_starts;
+    private $_ends;
+    
     public function __construct() {
         
     }
@@ -69,5 +73,21 @@ class CategoryEntity {
     
     public function setUser(UserEntity $oUser) {
         $this->_oUser = $oUser;
+    }
+    
+    public function setStarts($value) {
+        $this->_starts = $value;
+    }
+    
+    public function getStarts() {
+        return $this->_starts;
+    }
+    
+    public function setEnds($value) {
+        $this->_ends = $value;
+    }
+    
+    public function getEnds() {
+        return $this->_ends;
     }
 }

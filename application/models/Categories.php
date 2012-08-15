@@ -53,6 +53,31 @@ class Categories extends BaseModel {
         return ($result->num_rows > 0);
     }
     
+    public function getActiveCategory() {
+        $oCat = null;
+        $arrData = $this->query("SELECT Category.*, CurrentCategory.*
+            FROM current_category CurrentCategory
+            INNER JOIN categories Category ON Category.id = CurrentCategory.category_id
+            WHERE CurrentCategory.ends >= NOW() 
+            ORDER BY CurrentCategory.id DESC
+            LIMIT 1");
+        if (!empty($arrData)) {
+            $oCat =  $this->_getFromDBRecord($arrData[0]);
+        }
+        return $oCat;
+    }
+    
+    public function setActive($catId, $numDays) {
+        $strEndDate   = date('Y-m-d', strtotime('+'.$numDays.' days' , strtotime (date('Y-m-d'))));
+        $this->db->insert('current_category', array(
+                'category_id' => $catId,
+                'starts'      => date('Y-m-d'),
+                'ends'        => $strEndDate
+            )
+        );
+    }
+    
+    
     private function _getFromDBRecord($oRow) {
         $oCat = new CategoryEntity();
         $oCat->setId($oRow->id);
@@ -61,6 +86,11 @@ class Categories extends BaseModel {
         $oCat->setUserId($oRow->user_id);
         $oCat->setSlug($oRow->slug);
         $oCat->setCreated($oRow->created);
+        
+        if (isset($oRow->starts)) {
+            $oCat->setStarts($oRow->starts);
+            $oCat->setEnds($oRow->ends);
+        }
         
         if (isset($oRow->user_username)) {
             $oUser = new UserEntity();

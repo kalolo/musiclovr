@@ -26,6 +26,10 @@ class BaseController extends CI_Controller {
         } else {
             $this->_addViewParam('is_logged', false);
         }
+        
+        $this->load->model('Categories');
+        $oActiveCategory = $this->Categories->getActiveCategory();
+        $this->_addViewParam('oActiveCategory', $oActiveCategory);
     }
     
     protected function _checkAuth() {

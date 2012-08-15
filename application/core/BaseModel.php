@@ -10,8 +10,11 @@ class BaseModel extends CI_Model {
     }
 
     public function query($strQuery) {
-        $this->db->query($strQuery);
-        return $this->db->result_array();
+        $query = $this->db->query($strQuery);
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }
+        return array();
     }
 
     protected function _getAll($strTable) {

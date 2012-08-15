@@ -10,6 +10,9 @@ class Home extends BaseController {
     );
 
     public function index() {
+        $this->load->model('Categories');
+        $arrCategories = $this->Categories->getAll();
+        $this->_addViewParam('arrCategories', $arrCategories);
         $this->_loadView("home");
     }
     
@@ -30,5 +33,11 @@ class Home extends BaseController {
         $arrCategories = $this->Categories->getAll();
         $this->_addViewParam('arrCategories', $arrCategories);
         $this->_loadView('home/add_category');   
+    }
+    
+    public function add_new_song() {
+        $this->load->model('Categories');
+        $arrCategories = $this->Categories->getAll();
+        $this->_addViewParam('arrCategories', $arrCategories);
     }
 }
