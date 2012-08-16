@@ -4,7 +4,7 @@ class songs extends BaseModel {
     
     public function add($strFileName, $strPath) {
         $strSlug = Utils::slugger($strFileName);
-        if ($this->slugExist($strHeadline)) {
+        if ($this->slugExist($strSlug)) {
             $strSlug .= '-'.date('Y-m-d');
         }
         $this->db->insert('songs', array(

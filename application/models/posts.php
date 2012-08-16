@@ -73,7 +73,7 @@ class Posts extends BaseModel {
 
     public function add($numUserId, $strHeadline, $strBody, $numCategoryId, $numSongId) {
         $strSlug = Utils::slugger($strHeadline);
-        if ($this->slugExist($strHeadline)) {
+        if ($this->slugExist($strSlug)) {
             $strSlug .= '-'.date('Y-m-d');
         }
         $this->db->insert('posts', array(
@@ -213,8 +213,9 @@ class Posts extends BaseModel {
     
     public function slugExist($strSlug) {
         $this->db->select('*');
+        $this->db->from('posts');
         $this->db->where('slug', $strSlug);
-        $result = $this->db->get('posts');
+        $result = $this->db->get();
         return ($result->num_rows > 0);
     }
     

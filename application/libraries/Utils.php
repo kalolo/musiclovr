@@ -38,9 +38,9 @@ class Utils {
         $oZip       = new ZipArchive();
         $strZipName = self::slugger($strZipName).'.zip';
         $strZipPath = ALBUMS_FOLDER.$strZipName;
-        if ($oZip->open($strZipPath, ZipArchive::CREATE)) {
-            foreach ($arrFiles as $file) {
-                $oZip->addFile($file);
+        if ($oZip->open($strZipPath, ZipArchive::OVERWRITE)) {
+            foreach ($arrFiles as $arrFile) {
+                $oZip->addFile($arrFile['path'], $arrFile['name']);
             }
             $oZip->close();
             return $strZipName;

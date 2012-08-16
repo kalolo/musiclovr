@@ -83,7 +83,10 @@ class Script extends CI_Controller {
             if ($oSong != null) {
                 echo "    > ".$oSong->getFileName()."\n";
                 if (file_exists(MP3_FOLDER.$oSong->getFullpath())) {
-                    $arrSongs[] = MP3_FOLDER.$oSong->getFullpath();
+                    $arrSongs[] = array(
+                        'path' => MP3_FOLDER.$oSong->getFullpath(),
+                        'name' => $oSong->getFileName()
+                    );
                 }
             }
         }
@@ -92,9 +95,28 @@ class Script extends CI_Controller {
             $strZipFile = Utils::createZip($oCat->getName(), $arrSongs);
             echo ">> Album created: $strZipFile Size: ".Utils::fileZise(ALBUMS_FOLDER.$strZipFile)."\n";
             echo ">> Sending emails...\n";
+            
+            echo ">> Creating System post in the category...\n";
+            $strPostBody = $this->_renderTemplate('posts/category_album', 
+                    array('album_url' => base_url().'assets/albums/'.$strZipFile)
+            );
+            $this->posts->add($this->_systemUser->getId(), 
+                    'Album de '.$oCat->getName().' listo!', 
+                    $strPostBody, 
+                    $oCat->getId(), 
+                    0
+            );
+            
         } else {
             echo "No songs where found :(\n";
         }
         exit;
+    }
+    
+    private function _renderTemplate($strTemplate, $arrParams) {
+        return $this->load->view(
+                'templates/'. $strTemplate, 
+                $arrParams, true
+        );
     }
 }
