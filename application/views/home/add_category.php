@@ -12,9 +12,10 @@
 
 <div id="post-510" class="post-510 post type-post status-publish format-standard hentry category-memoriasdeunaepoca block">
     <div class="post-text">
-        <form name="frm_add_category" action="" method="POST">
-            <p>Nombre: <input type="text" vaue="" name="category_name" /></p>
-            <p>Descripción:</p><textarea name="category_description"></textarea>
+        <form id="commentform" name="frm_add_category" action="" method="POST">
+            <label>Nombre:</label><br />
+            <input style="width: 200px;" type="text" value="" name="category_name" /><br />
+            <label>Descripción:</label><textarea id="comment" rows="8" aria-required="true" name="category_description"></textarea>
             <br />   
             <input type="submit" name="btn_add" value="Agregar!" />
         </form>

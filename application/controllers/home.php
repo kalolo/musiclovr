@@ -57,4 +57,25 @@ class Home extends BaseController {
         }
         $this->_loadView('posts/new');
     }
+    
+    public function profile(){
+        $this->load->model('users');
+        if ($this->input->post('btn_add')) {
+            $strFirstname = $this->input->post('firstname');
+            $strLastname  = $this->input->post('lastname');
+            $strImgUrl    = $this->input->post('image_url');
+            
+            $this->users->update($this->_getLoggedUser()->id,
+                    array('firstname' => $strFirstname,
+                    'lastname'  => $strLastname,
+                    'profile_image_url' => $strImgUrl
+                    )
+            );
+        }
+        
+        
+        $oUser = $this->users->getById($this->_getLoggedUser()->id);
+        $this->_addViewParam('oUser', $oUser);
+        $this->_loadView('home/edit_profile');
+    }
 }

@@ -14,6 +14,7 @@ class Posts extends BaseModel {
             users.firstname AS user_firstname,
             users.lastname AS user_lastname,
             users.profile_image_id AS user_profile_image_id,
+            users.profile_image_url AS user_profile_image_url,
             users.slug AS user_slug');
         $this->db->from('posts');
         $this->db->join('users',
@@ -39,6 +40,7 @@ class Posts extends BaseModel {
             users.firstname AS user_firstname,
             users.lastname AS user_lastname,
             users.profile_image_id AS user_profile_image_id,
+            users.profile_image_url AS user_profile_image_url,
             users.slug AS user_slug,
             count(comments.id) AS total_comments');
         $this->db->from('posts');
@@ -101,6 +103,7 @@ class Posts extends BaseModel {
             users.firstname AS user_firstname,
             users.lastname AS user_lastname,
             users.profile_image_id AS user_profile_image_id,
+            users.profile_image_url AS user_profile_image_url,
             users.slug AS user_slug');
         $this->db->from('posts');
         $this->db->join('users',
@@ -133,6 +136,7 @@ class Posts extends BaseModel {
             users.firstname AS user_firstname,
             users.lastname AS user_lastname,
             users.profile_image_id AS user_profile_image_id,
+            users.profile_image_url AS user_profile_image_url,
             users.slug AS user_slug');
         $this->db->from('posts');
         $this->db->join('users',
@@ -163,6 +167,7 @@ class Posts extends BaseModel {
             users.firstname AS user_firstname,
             users.lastname AS user_lastname,
             users.profile_image_id AS user_profile_image_id,
+            users.profile_image_url AS user_profile_image_url,
             users.slug AS user_slug');
         $this->db->from('comments');
         $this->db->join('users',
@@ -182,6 +187,7 @@ class Posts extends BaseModel {
                     $oUser->setLastname($row->user_lastname);
                     $oUser->setProfileImageId($row->user_profile_image_id);
                     $oUser->setSlug($row->user_slug);
+                    $oUser->setProfileImageUrl($row->user_profile_image_url);
                     $oComment->setUser($oUser);
                 }
                 
@@ -228,6 +234,7 @@ class Posts extends BaseModel {
             $oUser->setLastname($oRow->user_lastname);
             $oUser->setProfileImageId($oRow->user_profile_image_id);
             $oUser->setSlug($oRow->user_slug);
+            $oUser->setProfileImageUrl($oRow->user_profile_image_url);
             $oPost->setUser($oUser);
         }
         return $oPost;

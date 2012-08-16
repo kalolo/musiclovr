@@ -13,6 +13,8 @@ class UserEntity {
     private $_strCreated;
     private $_strSlug;
     
+    private $_strProfileImageUrl;
+    
     public function __construct() {
         
     }
@@ -121,7 +123,14 @@ class UserEntity {
         return $this->_strFirstname." ".$this->_strLastname;
     }
     
+    public function setProfileImageUrl($val) {
+        $this->_strProfileImageUrl = $val;
+    }
+    
     public function getProfileImageUrl() {
-        return base_url().'assets/img/default.png';
+        if (empty($this->_strProfileImageUrl)) {
+            return base_url().'assets/img/default.png';
+        }
+        return $this->_strProfileImageUrl;
     }
 }

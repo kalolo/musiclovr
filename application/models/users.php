@@ -74,6 +74,10 @@ class Users extends BaseModel {
         return ($result->num_rows > 0);
     }
     
+    public function update($userId, $arrData) {
+        $this->_udpate('users', $userId, $arrData);
+    }
+    
     private function _buildFromResultSet($resultSet) {
         $oUser = new UserEntity();
         if (is_object($resultSet)) {
@@ -83,6 +87,7 @@ class Users extends BaseModel {
             $oUser->setLastname($resultSet->lastname);
             $oUser->setProfileImageId($resultSet->profile_image_id);
             $oUser->setRoleId($resultSet->role_id);
+            $oUser->setProfileImageUrl($resultSet->profile_image_url);
         }
         return $oUser;
     }
