@@ -44,3 +44,4 @@ define('ROLE_MACIZO', 2);
 define('ROLE_SYSTEM', 3);
 
 define('MP3_FOLDER',FCPATH.'assets/songs/');
+define('ALBUMS_FOLDER', FCPATH.'assets/albums/');

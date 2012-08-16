@@ -13,6 +13,8 @@ class Script extends CI_Controller {
         $this->load->helper('url');
         $this->load->model('users');
         $this->load->model('categories');
+        $this->load->model('posts');
+        $this->load->model('users');
                 
         $this->_systemUser = $this->users->getSystemUser();
     }
@@ -66,6 +68,32 @@ class Script extends CI_Controller {
                 echo "    >> Actualizando slug a ".$oUser->getUsername()."\n";
                 $this->users->udpateUserSlug($oUser->getId());
             }
+        }
+        exit;
+    }
+    
+    public function build_album($numCatId) {
+        $oCat     = $this->categories->getById($numCatId);
+        echo ">> Building album for:". $oCat->getName()."\n";
+        $arrPosts = $this->posts->getByCategory($numCatId);
+        echo ">> Getting songs...\n";
+        $arrSongs = array();
+        foreach ($arrPosts as $oPost) {
+            $oSong = $oPost->getSong();
+            if ($oSong != null) {
+                echo "    > ".$oSong->getFileName()."\n";
+                if (file_exists(MP3_FOLDER.$oSong->getFullpath())) {
+                    $arrSongs[] = MP3_FOLDER.$oSong->getFullpath();
+                }
+            }
+        }
+        if (!empty($arrSongs)) {
+            echo ">> Building zip file...\n";
+            $strZipFile = Utils::createZip($oCat->getName(), $arrSongs);
+            echo ">> Album created: $strZipFile Size: ".Utils::fileZise(ALBUMS_FOLDER.$strZipFile)."\n";
+            echo ">> Sending emails...\n";
+        } else {
+            echo "No songs where found :(\n";
         }
         exit;
     }

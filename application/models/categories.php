@@ -78,6 +78,18 @@ class Categories extends BaseModel {
         return $oCat;
     }
     
+    public function getById($numId) {
+        $oCat = null;
+        $this->db->select('*');
+        $this->db->where('id', $numId);
+        $result = $this->db->get('categories');
+        if ($result->num_rows > 0) {
+            $arrRows = $result->result();
+            $oCat =  $this->_getFromDBRecord($arrRows[0]);
+        }
+        return $oCat;
+    }
+    
     public function slugExist($strSlug) {
         $this->db->select('*');
         $this->db->where('slug', $strSlug);

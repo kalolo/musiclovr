@@ -21,4 +21,31 @@ class Utils {
         move_uploaded_file($currentPath, $newPath.'/'.$fileName);
         return $folderSlug.'/'.$fileName;
     }
+    
+    public static function fileZise($strFile) {
+        if (file_exists($strFile)) {
+            $bytes = filesize($strFile);
+            if ($bytes < 1048576) {
+                return round($bytes / 1024, 2) . ' Kb';
+            } else {
+                return round($bytes / 1048576, 2) . ' M';
+            }
+        }
+        return 0;
+    }
+    
+    public static function createZip($strZipName, $arrFiles) {
+        $oZip       = new ZipArchive();
+        $strZipName = self::slugger($strZipName).'.zip';
+        $strZipPath = ALBUMS_FOLDER.$strZipName;
+        if ($oZip->open($strZipPath, ZipArchive::CREATE)) {
+            foreach ($arrFiles as $file) {
+                $oZip->addFile($file);
+            }
+            $oZip->close();
+            return $strZipName;
+        } else {
+            throw new Exception('No se pudo crear el archivo zip :(');
+        }
+    }
 }
