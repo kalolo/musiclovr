@@ -7,7 +7,7 @@ class Login extends BaseController {
 
     public function index() {   
         if ($this->_isUserLogged()) {
-            redirect(base_url().'/home', 'location');
+            redirect(base_url().'home', 'location');
         }
         if ($this->input->post('lgn_username') && $this->input->post('lgn_password')) {
             $strUserName = trim($this->input->post('lgn_username'));

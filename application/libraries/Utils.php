@@ -9,4 +9,16 @@ class Utils {
         $strString = preg_replace("/[\/_|+ -]+/", '-', $strString);
         return $strString;
     }
+    
+    public static function moveSong($fileName, $currentPath, $folderSlug) {
+        $fileName = str_replace('.mp3','',$fileName);
+        $fileName = self::slugger(date('Ymd_His_').$fileName);
+        $fileName .= '.mp3';
+        $newPath  = MP3_FOLDER.$folderSlug;
+        if (!file_exists($newPath)) {
+            mkdir($newPath);
+        }
+        move_uploaded_file($currentPath, $newPath.'/'.$fileName);
+        return $folderSlug.'/'.$fileName;
+    }
 }

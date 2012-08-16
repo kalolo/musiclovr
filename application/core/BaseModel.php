@@ -26,4 +26,10 @@ class BaseModel extends CI_Model {
         $this->db->where('id', $numRecordId);
         $this->db->update($strTable, $arrData);
     }
+    
+    protected function _loadModel($strModel) {
+        $ci= get_instance();
+        $ci->load->model($strModel);
+        return $ci->$strModel;
+    }
 }

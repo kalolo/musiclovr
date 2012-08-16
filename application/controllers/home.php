@@ -43,17 +43,33 @@ class Home extends BaseController {
     }
     
     public function new_post() {
-        
         $oActiveCategory = $this->categories->getActiveCategory();
         $this->_addViewParam('oActiveCategory', $oActiveCategory);
         
         if ($this->input->post('add_post') && $oActiveCategory != null) {
-            $strHeadline = $this->input->post('headline');
-            $strBody     = $this->input->post('post_body');
-            
-            $this->load->model('posts');
-            $strSlug = $this->posts->add($this->_getLoggedUser()->id, $strHeadline, $strBody, $oActiveCategory->getId(), 0);
-            redirect(base_url().'post/'.$strSlug.'.html');
+            if ($_FILES["song"]["error"] > 0) {
+                $this->_addViewParam('error_msg', 'Problemas al subir el archivo D:');
+            } else {
+                $strFileName = $_FILES["song"]["name"];
+                $strTmpPath  = $_FILES["song"]["tmp_name"];
+                $this->_log(">> uploaded file: $strFileName -> path: $strTmpPath ");
+                $this->load->model('songs');
+                $this->load->model('posts');
+
+                $strHeadline = $this->input->post('headline');
+                $strBody     = $this->input->post('post_body');
+                $strNewPath = Utils::moveSong($strFileName, $strTmpPath, $oActiveCategory->getSlug());
+                
+                $numSongId = $this->songs->add($strFileName, $strNewPath);
+                $strSlug   = $this->posts->add(
+                    $this->_getLoggedUser()->id, 
+                    $strHeadline, 
+                    $strBody, 
+                    $oActiveCategory->getId(), 
+                    $numSongId
+                 );
+                redirect(base_url() . 'post/' . $strSlug . '.html');
+            }
         }
         $this->_loadView('posts/new');
     }
@@ -72,8 +88,6 @@ class Home extends BaseController {
                     )
             );
         }
-        
-        
         $oUser = $this->users->getById($this->_getLoggedUser()->id);
         $this->_addViewParam('oUser', $oUser);
         $this->_loadView('home/edit_profile');

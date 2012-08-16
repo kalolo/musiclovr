@@ -7,14 +7,15 @@
 </div>
 <div class="post type-post status-publish format-standard hentry block">
     <div class="post-text">
-        <form id="frm_new_post" action="" method="POST">
+        <!--<form id="frm_new_post" action="" method="POST">-->
+        <form action="<?php echo base_url(); ?>home/new_post" method="post" accept-charset="utf-8" enctype="multipart/form-data">
             <p>Titulo:<input type="text" value="" name="headline" /></p>
             <p>
                 <textarea id="text_area_post_body" name="post_body" style="width: 100%; height: 200px;">
                 ...
                 </textarea>
             </p>
-            <h4>Canción</h4><input type="file" name="song" />
+            <h4>Canción</h4><input type="file" name="song" size="20" />
             <br /><br />
             <input type="submit" name="add_post" value="Comparte, comparte, comparte!!" />
             <br />

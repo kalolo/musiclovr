@@ -12,6 +12,14 @@
     <div class="post-text">
         <?php echo $oPost->getBody(); ?>
     </div>
+    <div class="song-player">
+        <?php 
+        $oSong = $oPost->getSong();
+        if (null != $oSong) {
+            echo '<a href="'.base_url().'assets/songs/'.$oSong->getFullPath().'">'.$oSong->getFileName().'</a>';
+        }
+        ?>
+    </div>
 </div>
 <?php
     include 'comments/new.php';

@@ -6,7 +6,14 @@
     <div class="post-text">
         <?php echo $oPost->getBody(); ?>
     </div>
-    <p>SONG</p>
+    <div class="song-player">
+        <?php 
+        $oSong = $oPost->getSong();
+        if (null != $oSong) {
+            echo '<a href="'.base_url().'assets/songs/'.$oSong->getFullPath().'">'.$oSong->getFileName().'</a>';
+        }
+        ?>
+    </div>
     <p class="meta">	
         <a href="<?php echo base_url(); ?>post/<?php echo $oPost->getSlug(); ?>#respond">Dejar comentario</a>
     </p>

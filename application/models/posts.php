@@ -58,8 +58,14 @@ class Posts extends BaseModel {
         $result = $this->db->get();
         if ($result->num_rows > 0) {
             $arrRows = $result->result();
+            $SongsModel = $this->_loadModel('songs');
             foreach ($arrRows as $oRow) {
-                $arrPosts[] = $this->_getFromDBRecord($oRow);
+                $oPost = $this->_getFromDBRecord($oRow);
+                $oSong = $SongsModel->getById($oPost->getSongId());
+                if ($oSong != null) {
+                    $oPost->setSong($oSong);
+                }
+                $arrPosts[] = $oPost;
             }
         }
         return $arrPosts;
@@ -155,6 +161,11 @@ class Posts extends BaseModel {
             $oPost->setComments(
                 $this->getComments($oPost->getId())
             );
+            $SongsModel = $this->_loadModel('songs');
+            $oSong = $SongsModel->getById($oPost->getSongId());
+            if ($oSong != null) {
+                $oPost->setSong($oSong);
+            }
         }
         return $oPost;
     }
@@ -215,6 +226,7 @@ class Posts extends BaseModel {
         $oPost->setUserId($oRow->user_id);
         $oPost->setSlug($oRow->slug);
         $oPost->setCreated($oRow->created);
+        $oPost->setSongId($oRow->song_id);
         
         if (isset($oRow->category_name)) {
             $oCat = new CategoryEntity();

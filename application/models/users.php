@@ -11,6 +11,7 @@ class Users extends BaseModel {
             $this->db->select('*');
             $this->db->where('username', $strUserName);
             $this->db->where('password', $strPassword);
+            $this->db->where('role_id IN (1,2)');
             $result = $this->db->get('users');
             if ($result->num_rows > 0) {
                 $arrUser = $result->result();

@@ -6,18 +6,10 @@ if (!defined('BASEPATH'))
 class Admin extends BaseController {
     
     protected $_auth = array(
-        'role_id' => array(ROLE_COMPA, ROLE_MACIZO)
+        'role_id' => array(ROLE_MACIZO)
     );
-
-    public function index() {
-        $this->load->model('categories');
-        
-        $arrCategories = $this->categories->getAll();
-        $this->_addViewParam('arrCategories', $arrCategories);
-        $this->_loadView("home");
-    }
     
-    public function active_category() {
+    public function pick_category() {
         $this->load->model('categories');
         
         if ($this->input->post('category')) {

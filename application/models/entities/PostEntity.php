@@ -120,4 +120,12 @@ class PostEntity {
             return $this->_numTotalCommens;
         }
     }
+    
+    public function setSong(SongEntity $oSong) {
+        $this->_oSong = $oSong;
+    }
+    
+    public function getSong() {
+        return $this->_oSong;
+    }
 }

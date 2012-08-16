@@ -14,7 +14,7 @@ class BaseController extends CI_Controller {
         parent::__construct();
         $this->load->library('session');
         $this->load->library('utils');
-        $this->load->helper('url');
+        $this->load->helper(array('form', 'url'));
         
         if (!$this->_checkAuth()) {
             redirect(base_url().'login', 'location');
