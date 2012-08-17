@@ -122,6 +122,11 @@ class Script extends CI_Controller {
         $this->email->message($body);
         $this->email->send();
     }
+    public function parse_comments() {
+         $strComment ='Bla bla bla adfasdf asdfa sdfñasdjfañklsdflkaadsfasd www.youtube.com/watch?v=234239smv01b asdfasdf adfasf http://www.imgur.com/imagen.png adsfa sdfas dfasdas';
+         $strText    = Utils::parseComment($strComment);
+         echo "\n ".$strComment."\n\n\n".$strText."\n";
+    }
     
     private function _renderTemplate($strTemplate, $arrParams) {
         return $this->load->view(

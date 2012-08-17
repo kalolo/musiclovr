@@ -50,25 +50,16 @@ class Utils {
     }
 
     public static function parseComment($strComment) {
-        $arrText  = array();
+        $strText  = '';
         $arrWords = explode(' ', $strComment);
         foreach ($arrWords as $word) {
-            /*$word = preg_replace(
-                    "#((http|https|ftp)://(\S*?\.\S*?))(\s|\;|\)|\]|\[|\{|\}|,|\"|'|:|\<|$|\.\s)#ie",
-                    "'<a href=\"$1\" target=\"_blank\">$3</a>$4'",
-                    $word
-            );*/
-            if (preg_match('!http://[a-z0-9\-._~\!$&\'()*+,;=:/?#[\]@%]+!i', $word)) {
-                //It's a url
-               if (preg_match('/\.(?:jpe?g|png|gif)(?:$|[?#])/', $word)) {  
-                   $word = '<p><img src="'. $word .'"></p>';
-               } else {
-                   $word = '<a href="'. $word .'" target="_blank" >'. $word .'</a>';
-               }
+            if (preg_match('!(http://|https://)[a-z0-9\-._~\!$&\'()*+,;=:/?#[\]@%]+!i', $word)) {
+               $word = (preg_match('/\.(?:jpe?g|png|gif)(?:$|[?#])/', $word))
+                     ? '<p><img src="'. $word .'"></p>'
+                     : '<a href="'. $word .'" target="_blank" >'. $word .'</a>';
             }
-
-            $arrText[] = $word;
+            $strText .= $word.' ';
         }
-        return implode($arrText, ' ');
+        return trim($strText);
     }
 }
