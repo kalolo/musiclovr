@@ -90,6 +90,7 @@ class Posts extends BaseModel {
     }
     
     public function addComment($numPostId, $numUserId, $strBody) {
+        $strBody = Utils::parseComment($strBody);
         $this->db->insert('comments', array(
                 'post_id' => $numPostId,
                 'body'    => $strBody,
@@ -186,6 +187,7 @@ class Posts extends BaseModel {
                 'inner'
         );
         $this->db->where('comments.post_id', $numPostId);
+        $this->db->order_by('comments.created','ASC');
         $result = $this->db->get();
         if ($result->num_rows > 0) {
             $arrRows = $result->result();

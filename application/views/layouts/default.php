@@ -51,7 +51,8 @@
                             </div>
                     </li>
 
-                    <li id="categories-2" class="widget-container widget_categories"><h3 class="widget-title">Temas:</h3>		<ul>
+                    <li id="categories-2" class="widget-container widget_categories"><h3 class="widget-title">Temas:</h3>
+                        <ul>
                             
                             <?php foreach ($arrActiveCategories as $oCat) { 
                                 echo '<li class="cat-item cat-item-10">
@@ -60,15 +61,25 @@
                              } 
                              ?>
                         </ul>
-                    </li><li id="nav_menu-2" class="widget-container widget_nav_menu"><h3 class="widget-title">Links</h3><div class="menu-sidebar-container"><ul id="menu-sidebar" class="menu"><li id="menu-item-14" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14"><a href="<?php echo base_url(); ?>/sample-page/">Contexto y reglas</a></li>
-                                <li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20"><a href="<?php echo base_url(); ?>/instrucciones-para-publicar/">Instrucciones para publicar</a></li>
-                            </ul></div></li>	</ul>
-                <!--end Sidebar -->
-
+                    </li>
+                    <li id="nav_menu-2" class="widget-container widget_nav_menu">
+                        <h3 class="widget-title">Links</h3>
+                        <div class="menu-sidebar-container">
+                            <ul id="menu-sidebar" class="menu">
+                                <li id="menu-item-14" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14">
+                                    <a href="<?php echo base_url(); ?>/sample-page/">Contexto y reglas</a>
+                                </li>
+                                <li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20">
+                                    <a href="<?php echo base_url(); ?>/instrucciones-para-publicar/">Instrucciones para publicar</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    </ul>
+                    <!--end Sidebar -->
             </div>
             <!--end Sidebar One-->
             <div id="main">
-
                 <div id="content">
                     <?php echo $strContentView; ?>
                 </div>
@@ -81,17 +92,5 @@
             <!--end Footer-->
 
         </div>
-        <!--end Wrap-->
-        <script type="text/javascript">
-            (function() {
-                var request, b = document.body, c = 'className', cs = 'customize-support', rcs = new RegExp('(^|\\s+)(no-)?'+cs+'(\\s+|$)');
-
-                request = true;
-
-                b[c] = b[c].replace( rcs, '' );
-                b[c] += ( window.postMessage && request ? ' ' : ' no-' ) + cs;
-            }());
-        </script>
-
     </body>
 </html>

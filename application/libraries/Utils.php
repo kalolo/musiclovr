@@ -48,4 +48,27 @@ class Utils {
             throw new Exception('No se pudo crear el archivo zip :(');
         }
     }
+
+    public static function parseComment($strComment) {
+        $arrText  = array();
+        $arrWords = explode(' ', $strComment);
+        foreach ($arrWords as $word) {
+            /*$word = preg_replace(
+                    "#((http|https|ftp)://(\S*?\.\S*?))(\s|\;|\)|\]|\[|\{|\}|,|\"|'|:|\<|$|\.\s)#ie",
+                    "'<a href=\"$1\" target=\"_blank\">$3</a>$4'",
+                    $word
+            );*/
+            if (preg_match('!http://[a-z0-9\-._~\!$&\'()*+,;=:/?#[\]@%]+!i', $word)) {
+                //It's a url
+               if (preg_match('/\.(?:jpe?g|png|gif)(?:$|[?#])/', $word)) {  
+                   $word = '<p><img src="'. $word .'"></p>';
+               } else {
+                   $word = '<a href="'. $word .'" target="_blank" >'. $word .'</a>';
+               }
+            }
+
+            $arrText[] = $word;
+        }
+        return implode($arrText, ' ');
+    }
 }
