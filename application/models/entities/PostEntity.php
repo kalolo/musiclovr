@@ -128,4 +128,8 @@ class PostEntity {
     public function getSong() {
         return $this->_oSong;
     }
+    
+    public function getFullUrl() {
+        return base_url().'post/'.$this->_strSlug.'.html';
+    }
 }

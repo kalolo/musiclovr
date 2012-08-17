@@ -20,6 +20,8 @@
         }
         ?>
     </div>
+    <p class="meta">
+    </p>
 </div>
 <?php
     include 'comments/new.php';

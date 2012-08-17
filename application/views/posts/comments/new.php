@@ -1,6 +1,8 @@
 <div class="commentsblock block">
     <div id="comments-content" class="clearfix">
-        <h3 id="comments">Comments <?php echo $oPost->getTotalComments(); ?></h3>
+        <h3 id="comments">
+                Comentarios <?php echo $oPost->getTotalComments(); ?>
+            </h3>
         <ol class="commentlist">
         <?php
             $arrComments = $oPost->getComments();
