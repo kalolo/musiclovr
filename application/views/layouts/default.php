@@ -21,6 +21,12 @@
                 }).remove()
             });
         </script>
+        <script type="text/javascript" src="assets/js/audio-player.js"></script>  
+        <script type="text/javascript">  
+            AudioPlayer.setup("<?php echo base_url().'assets/swf/player.swf';?>", {  
+                width: 290  
+            });  
+        </script>  
     </head>
     <body class="home blog logged-in admin-bar">
 

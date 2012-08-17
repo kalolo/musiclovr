@@ -12,11 +12,11 @@
     <div class="post-text">
         <?php echo $oPost->getBody(); ?>
     </div>
-    <div class="song-player">
+    <div class="post-text">
         <?php 
         $oSong = $oPost->getSong();
         if (null != $oSong) {
-            echo '<a href="'.base_url().'assets/songs/'.$oSong->getFullPath().'">'.$oSong->getFileName().'</a>';
+            include 'song_player.php';
         }
         ?>
     </div>

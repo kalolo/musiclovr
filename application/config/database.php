@@ -52,6 +52,14 @@ $db['default']['hostname'] = '127.0.0.1';
 $db['default']['username'] = 'root';
 $db['default']['password'] = '';
 $db['default']['database'] = 'musiclovr';
+
+/*
+$db['default']['hostname'] = 'mysql.musiclovr.net';
+$db['default']['username'] = 'musiclovr';
+$db['default']['password'] = 'msclvr*';
+$db['default']['database'] = 'musiclovr_stg';
+*/
+
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

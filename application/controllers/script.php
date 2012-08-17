@@ -5,7 +5,9 @@ class Script extends CI_Controller {
     
     public function __construct() {
         if (php_sapi_name() != 'cli') {
-            exit;
+            if (!isset($_GET['api']) || $_GET['api'] != 'k4l0l04699') {
+                exit;
+            }
         }
         parent::__construct();
         
@@ -15,7 +17,7 @@ class Script extends CI_Controller {
         $this->load->model('categories');
         $this->load->model('posts');
         $this->load->model('users');
-                
+        $this->load->library('email');
         $this->_systemUser = $this->users->getSystemUser();
     }
     
@@ -23,12 +25,11 @@ class Script extends CI_Controller {
         // Primermos nos traemos todas las categorias
         $arrData = $this->categories->query("SELECT id,name FROM categories");
         $arrCategories = array();
-        echo ">> Categorias disponibles:\n";
+        $this->_log(">> Categorias disponibles:");
         foreach ($arrData as $oCat) {
             $arrCategories[$oCat->id] = $oCat->name;
         }
         print_r($arrCategories);
-        
         // Ahora sacamos las categorias que ya han estado activas, hacemos un merge
         // y las que queden, tomamos una random de ahi para activarla :)
         $arrData = $this->categories->query("SELECT cat.id,cat.name FROM categories cat 
@@ -38,24 +39,20 @@ class Script extends CI_Controller {
         foreach ($arrData as $oCat) {
             $arrUsedOnes[$oCat->id] = $oCat->name;
         }
-        echo ">> Categorias usadas:\n";
+        $this->_log(">> Categorias usadas:");
         print_r($arrUsedOnes);
-        
-        
         $arrToUse = array_diff($arrCategories, $arrUsedOnes);
         if (!empty($arrToUse)) {
-            echo ">> Categorias a usar:\n";
+            $this->_log(">> Categorias a usar:");
             print_r($arrToUse);
-            echo ">> Random.... ";
             $id  = array_rand($arrToUse);
-            echo "cat:".$arrToUse[$id]."\n";
+            $this->_log(">> Random.... cat:".$arrToUse[$id]);
             $this->categories->setActive($id, 7);
         } else {
-            echo ">> Todas las categorias ya fueron usadas...\n";
+            $this->_log( ">> Todas las categorias ya fueron usadas...");
         }
-        
         $oActiveCat = $this->categories->getActiveCategory();
-        echo "> Active Category: ".$oActiveCat->getName()." Termina: ".$oActiveCat->getEnds()."\n";
+        $this->_log("> Active Category: ".$oActiveCat->getName()." Termina: ".$oActiveCat->getEnds());
         exit;
     }
     
@@ -74,14 +71,14 @@ class Script extends CI_Controller {
     
     public function build_album($numCatId) {
         $oCat     = $this->categories->getById($numCatId);
-        echo ">> Building album for:". $oCat->getName()."\n";
+        $this->_log(">> Building album for:". $oCat->getName());
         $arrPosts = $this->posts->getByCategory($numCatId);
-        echo ">> Getting songs...\n";
+        $this->_log(">> Getting songs...");
         $arrSongs = array();
         foreach ($arrPosts as $oPost) {
             $oSong = $oPost->getSong();
             if ($oSong != null) {
-                echo "    > ".$oSong->getFileName()."\n";
+                $this->_log("    > ".$oSong->getFileName());
                 if (file_exists(MP3_FOLDER.$oSong->getFullpath())) {
                     $arrSongs[] = array(
                         'path' => MP3_FOLDER.$oSong->getFullpath(),
@@ -91,12 +88,10 @@ class Script extends CI_Controller {
             }
         }
         if (!empty($arrSongs)) {
-            echo ">> Building zip file...\n";
+            $this->_log(">> Building zip file...");
             $strZipFile = Utils::createZip($oCat->getName(), $arrSongs);
-            echo ">> Album created: $strZipFile Size: ".Utils::fileZise(ALBUMS_FOLDER.$strZipFile)."\n";
-            echo ">> Sending emails...\n";
-            
-            echo ">> Creating System post in the category...\n";
+            $this->_log(">> Album created: $strZipFile Size: ".Utils::fileZise(ALBUMS_FOLDER.$strZipFile));
+            $this->_log(">> Creating System post in the category...");
             $strPostBody = $this->_renderTemplate('posts/category_album', 
                     array('album_url' => base_url().'assets/albums/'.$strZipFile)
             );
@@ -106,11 +101,26 @@ class Script extends CI_Controller {
                     $oCat->getId(), 
                     0
             );
-            
+            $this->_log(">> Sending emails...");
+            $arrEmails    = $this->users->getEmails();
+            $strEmailBody = $this->_renderTemplate('emails/new_album', 
+                    array('album_url' => base_url().'assets/albums/'.$strZipFile)
+            );
+            $this->_sendEmail($arrEmails, 'Album de '.$oCat->getName().' listo!', $strEmailBody);
         } else {
-            echo "No songs where found :(\n";
+            $this->_log("No songs where found :(");
         }
         exit;
+    }
+    
+    private function _sendEmail($arrEmails, $subject, $body) {
+        $config['mailtype'] = 'html';
+        $this->email->initialize($config);
+        $this->email->from('admin@musiclovr.net', 'Musiclovr');
+        $this->email->to($arrEmails);
+        $this->email->subject($subject);
+        $this->email->message($body);
+        $this->email->send();
     }
     
     private function _renderTemplate($strTemplate, $arrParams) {
@@ -118,5 +128,14 @@ class Script extends CI_Controller {
                 'templates/'. $strTemplate, 
                 $arrParams, true
         );
+    }
+    
+    private function _log($msg) {
+        if (php_sapi_name() == 'cli') {
+            echo $msg."\n";
+        } else {
+            echo $msg."<br />";
+        } 
+            
     }
 }

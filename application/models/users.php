@@ -78,6 +78,19 @@ class Users extends BaseModel {
     public function update($userId, $arrData) {
         $this->_udpate('users', $userId, $arrData);
     }
+   
+    public function getEmails() {
+        $arrEmails = array();
+        $this->db->select('*');
+        $this->db->where('role_id != ', ROLE_SYSTEM);
+        $result = $this->db->get('users');
+        if ($result->num_rows > 0) {
+             $arrUser = $result->result();
+             $oUser   = $this->_buildFromResultSet($arrUser[0]);
+             $arrEmails[] = $oUser->getFullName().' <'.$oUser->getUsername().'>';
+        }
+        return $arrEmails;
+    }
     
     private function _buildFromResultSet($resultSet) {
         $oUser = new UserEntity();
