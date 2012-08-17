@@ -81,12 +81,22 @@ class Home extends BaseController {
             $strLastname  = $this->input->post('lastname');
             $strImgUrl    = $this->input->post('image_url');
             
-            $this->users->update($this->_getLoggedUser()->id,
-                    array('firstname' => $strFirstname,
-                    'lastname'  => $strLastname,
-                    'profile_image_url' => $strImgUrl
-                    )
-            );
+            $arrUpdateData = array(
+                'firstname' => $strFirstname,
+                'lastname'  => $strLastname,
+                'profile_image_url' => $strImgUrl
+             );
+            
+            if ($this->input->post('update_password')) {
+                $pass  = trim($this->input->post('password'));
+                $pass2 = trim($this->input->post('password2'));
+                if (!empty($pass) && $pass == $pass2) {
+                    $arrUpdateData['password'] = $pass;    
+                } else {
+                    $this->_addViewParam('error_msg', 'Las contraseñas no coinciden');
+                }
+            }
+            $this->users->update($this->_getLoggedUser()->id, $arrUpdateData);
         }
         $oUser = $this->users->getById($this->_getLoggedUser()->id);
         $this->_addViewParam('oUser', $oUser);

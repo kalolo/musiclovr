@@ -14,7 +14,36 @@
             
             <label>Profile Image Url:</label><br />
             <input style="width: 300px;" type="text" value="<?php echo $oUser->getProfileImageUrl(); ?>" name="image_url" /><br />
+            <br />
+            Cambiar Contraseña<input type="checkbox" name="update_password" id="toggle_password" />
+            <div id="change_password">
+                <br />
+                <label>Contrasña:</label><br />
+                <input style="width: 300px;" type="password" value="" name="password" /><br />
+                <label>Repetir Contrasña:</label><br />
+                <input style="width: 300px;" type="password" value="" name="password2" /><br />
+            </div>
+            <br />
             <input type="submit" name="btn_add" value="Editar!" />
+            <?php 
+                if (isset($error_msg)) {
+                    echo '<div id="error_msg">'.$error_msg.'</div>';        
+                }
+            ?>
         </form>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#change_password').hide();
+        
+        $('#toggle_password').click(function(){
+           if(this.checked){
+               $('#change_password').show()
+           } else {
+               $('#change_password').hide()
+           }
+        });
+    });
+
+</script>
