@@ -93,7 +93,13 @@ class Script extends CI_Controller {
             $this->_log(">> Album created: $strZipFile Size: ".Utils::fileZise(ALBUMS_FOLDER.$strZipFile));
             $this->_log(">> Creating System post in the category...");
             $strPostBody = $this->_renderTemplate('posts/category_album', 
-                    array('album_url' => base_url().'assets/albums/'.$strZipFile)
+                    array(
+                          'album_url'     => base_url().'assets/albums/'.$strZipFile,
+                          'category_name' => $oCat->getName(),
+                          'cover_img'     => 'default.png',
+                          'thumb_img'     => 'default_thumb.png',
+                          'arrSongs'      => $arrSongs
+                    )
             );
             $this->posts->add($this->_systemUser->getId(), 
                     'Album de '.$oCat->getName().' listo!', 
@@ -104,7 +110,12 @@ class Script extends CI_Controller {
             $this->_log(">> Sending emails...");
             $arrEmails    = $this->users->getEmails();
             $strEmailBody = $this->_renderTemplate('emails/new_album', 
-                    array('album_url' => base_url().'assets/albums/'.$strZipFile)
+                    array(
+                        'album_url'     => base_url().'assets/albums/'.$strZipFile,
+                        'category_name' => $oCat->getName(),
+                        'cover_img'     => 'default.png',
+                        'arrSongs'      => $arrSongs
+                    )
             );
             $this->_sendEmail($arrEmails, 'Album de '.$oCat->getName().' listo!', $strEmailBody);
         } else {
@@ -121,11 +132,6 @@ class Script extends CI_Controller {
         $this->email->subject($subject);
         $this->email->message($body);
         $this->email->send();
-    }
-    public function parse_comments() {
-         $strComment ='Bla bla bla adfasdf asdfa sdfñasdjfañklsdflkaadsfasd www.youtube.com/watch?v=234239smv01b asdfasdf adfasf http://www.imgur.com/imagen.png adsfa sdfas dfasdas';
-         $strText    = Utils::parseComment($strComment);
-         echo "\n ".$strComment."\n\n\n".$strText."\n";
     }
     
     private function _renderTemplate($strTemplate, $arrParams) {
