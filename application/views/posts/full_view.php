@@ -19,8 +19,8 @@
             include 'song_player.php';
         }
         ?>
-    </div>
-    <p class="meta">
+    </div><br />
+    <p class="meta">&nbsp;&nbsp;
     </p>
 </div>
 <?php

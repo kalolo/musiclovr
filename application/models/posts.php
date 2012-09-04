@@ -5,6 +5,11 @@ require_once 'entities/CommentEntity.php';
 class Posts extends BaseModel {
 
     protected $table = 'posts';
+
+    public function update($numPostId, $arrData) {
+         $this->db->where('id', $numPostId);
+         $this->db->update('posts', $arrData);
+    }
     
     public function getAll() {
         $arrPosts = array();
@@ -219,6 +224,20 @@ class Posts extends BaseModel {
         $this->db->where('slug', $strSlug);
         $result = $this->db->get();
         return ($result->num_rows > 0);
+    }
+    
+    public function isSystemPostExist($numCatId, $numSystemUserId) {
+        $this->db->select('posts.id');
+        $this->db->from('posts');
+        $this->db->where('category_id', $numCatId);
+        $this->db->where('user_id', $numSystemUserId);
+        $result = $this->db->get();
+        
+        if ($result->num_rows > 0)  {
+            $arrRecord = $result->result();
+            return $arrRecord[0]->id;
+        }
+        return false;
     }
     
     private function _getFromDBRecord($oRow) {

@@ -10,7 +10,6 @@ class Script extends CI_Controller {
             }
         }
         parent::__construct();
-        
         $this->load->library('utils');
         $this->load->helper('url');
         $this->load->model('users');
@@ -21,7 +20,20 @@ class Script extends CI_Controller {
         $this->_systemUser = $this->users->getSystemUser();
     }
     
-    public function pick_new_category() {
+    public function close_active_category() {
+        $oActiveCat = $this->categories->getActiveCategory();
+        if ($oActiveCat != null) {
+            $this->_log("> Active Category: ".$oActiveCat->getName()." Termina: ".$oActiveCat->getEnds());
+            $arrAlbumData = $this->build_album($oActiveCat->getId());
+            print_r($arrAlbumData);
+            $this->pick_new_category();
+        } else {
+            $this->_log(">> No hay categoria activa...");
+        }
+        exit;
+    }
+    
+    private function pick_new_category() {
         // Primermos nos traemos todas las categorias
         $arrData = $this->categories->query("SELECT id,name FROM categories");
         $arrCategories = array();
@@ -53,7 +65,7 @@ class Script extends CI_Controller {
         }
         $oActiveCat = $this->categories->getActiveCategory();
         $this->_log("> Active Category: ".$oActiveCat->getName()." Termina: ".$oActiveCat->getEnds());
-        exit;
+        return $oActiveCat;
     }
     
     public function update_user_slugs() {
@@ -69,7 +81,7 @@ class Script extends CI_Controller {
         exit;
     }
     
-    public function build_album($numCatId) {
+    private function build_album($numCatId) {
         $oCat     = $this->categories->getById($numCatId);
         $this->_log(">> Building album for:". $oCat->getName());
         $arrPosts = $this->posts->getByCategory($numCatId);
@@ -101,27 +113,29 @@ class Script extends CI_Controller {
                           'arrSongs'      => $arrSongs
                     )
             );
-            $this->posts->add($this->_systemUser->getId(), 
+            $numPostId = $this->posts->isSystemPostExist($oCat->getId(), $this->_systemUser->getId());
+            if ($numPostId) {
+                $this->posts->update($numPostId, array(
+                    'body' => $strPostBody
+                ));
+            } else {
+                $this->posts->add($this->_systemUser->getId(), 
                     'Album de '.$oCat->getName().' listo!', 
                     $strPostBody, 
                     $oCat->getId(), 
                     0
-            );
-            $this->_log(">> Sending emails...");
-            $arrEmails    = $this->users->getEmails();
-            $strEmailBody = $this->_renderTemplate('emails/new_album', 
-                    array(
+                );
+            }
+            return array(
                         'album_url'     => base_url().'assets/albums/'.$strZipFile,
                         'category_name' => $oCat->getName(),
                         'cover_img'     => 'default.png',
                         'arrSongs'      => $arrSongs
-                    )
             );
-            $this->_sendEmail($arrEmails, 'Album de '.$oCat->getName().' listo!', $strEmailBody);
         } else {
             $this->_log("No songs where found :(");
         }
-        exit;
+        return false;
     }
     
     private function _sendEmail($arrEmails, $subject, $body) {
