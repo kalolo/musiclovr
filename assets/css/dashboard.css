@@ -1,0 +1,307 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	font: normal 14px/16px Arial, Helvetica, sans-serif;
+	background: #eee url(../img/db-bg-light.png);
+	text-shadow: 0 1px 0 rgba(255,255,255,1);
+}
+
+header{
+	height: 50px;
+	background: #333;
+	color: #fff;
+	line-height: 50px;
+
+	background-image: -moz-linear-gradient(top,  rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.2)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient(top,  rgba(255,255,255,0.2) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+	background-image: -o-linear-gradient(top,  rgba(255,255,255,0.2) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+	background-image: -ms-linear-gradient(top,  rgba(255,255,255,0.2) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+	background-image: linear-gradient(to bottom,  rgba(255,255,255,0.2) 0%,rgba(255,255,255,0) 100%); /* W3C */
+
+	box-shadow: 0 1px 3px rgba(0,0,0,.5);
+
+}
+
+header h1{
+	width: 254px;
+	height: 0;
+	background: red;
+	overflow: hidden;
+	padding-top: 50px;
+	background: url(../img/db-logo.png) no-repeat;
+	float: left;
+	position: relative;
+}
+
+nav{
+	position: absolute;
+	left: 254px;
+	top: 0;
+	white-space: nowrap;
+}
+
+nav ul{
+	list-style: none;
+}
+
+nav li{
+	float: left;
+}
+
+nav li a{
+	color: #fff;
+	text-decoration: none;
+	display: block;
+	padding: 0 10px;
+	text-transform: uppercase;
+	text-shadow: 0 -1px 0 rgba(0,0,0,.75);
+}
+
+.login{
+	width: 300px;
+	margin: 50px auto;
+	background: #fff;
+	border-radius: 3px;
+	overflow: hidden;
+	box-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+
+.login h2{
+	line-height: 30px;
+	font-size: 14px;
+	font-weight: normal;
+	padding: 0 10px;
+	background: #333;
+	color: #fff;
+
+	background-image: -moz-linear-gradient(top,  rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.2)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient(top,  rgba(255,255,255,0.2) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+	background-image: -o-linear-gradient(top,  rgba(255,255,255,0.2) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+	background-image: -ms-linear-gradient(top,  rgba(255,255,255,0.2) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+	background-image: linear-gradient(to bottom,  rgba(255,255,255,0.2) 0%,rgba(255,255,255,0) 100%); /* W3C */
+
+	text-shadow: 0 -1px 0 rgba(0,0,0,.75);
+}
+
+.login form{
+	display: block;
+	margin: 10px;
+	overflow: hidden;
+}
+
+.login p{
+	float: left;
+}
+
+.login p:last-child{
+	padding: 0 0 5px 100px;
+}
+
+.login label{
+	width: 80px;
+	display: block;
+	float: left;
+	padding: 5px 0;
+	margin-right: 20px;
+	margin-bottom: 5px;
+	clear: both;
+}
+
+.login input[type=text],
+.login input[type=password]{
+	width: 158px;
+	padding: 5px 10px;
+	border: 1px solid #aaa;
+	box-shadow: 0 1px 3px rgba(0,0,0,.2) inset;
+	color: #666;
+	font-size: 14px;
+	float: left;
+	margin-bottom: 5px;
+	position: relative;
+}
+
+.login input[type=text]:focus,
+.login input[type=password]:focus{
+	outline: none;
+	border-color: #f90;
+}
+
+.main{
+	width: 620px;
+	padding: 20px;
+	float: left;
+}
+
+.main h2{
+	font-size: 24px;
+	font-weight: bold;
+	line-height: 40px;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 20px;
+	clear: both;
+}
+
+.main form p{
+	margin-bottom: 20px;
+	clear: both;
+}
+
+.main form > p:last-child{
+	padding: 20px 0;
+	border-top: 1px solid #ddd;
+	overflow: hidden;
+	margin-bottom: 0;
+}
+
+.main form p.half{
+	width: 300px;
+	float: left;
+}
+
+.main form p.second{
+	margin-left: 20px;
+	clear: none;
+}
+
+.main label{
+	display: block;
+	line-height: 20px;
+}
+
+.main label i{
+	color: #aaa;
+}
+
+.main input[type=text],
+.main input[type=password],
+.main textarea{
+	width: 598px;
+	padding: 5px 10px;
+	border: 1px solid #aaa;
+	box-shadow: 0 1px 3px rgba(0,0,0,.2) inset;
+	color: #666;
+	font-size: 14px;
+}
+
+.main .half input[type=text],
+.main .half input[type=password],
+.main .half textarea{
+	width: 278px;
+	padding: 5px 10px;
+	border: 1px solid #aaa;
+	box-shadow: 0 1px 3px rgba(0,0,0,.2) inset;
+	color: #666;
+	font-size: 14px;
+}
+
+.main input[type=text]:focus,
+.main input[type=password]:focus
+.main textarea:focus{
+	outline: none;
+	border-color: #f90;
+}
+
+.main input[type=submit],
+.login input[type=submit]{
+	height: 40px;
+	padding: 0 20px;
+	display: block;
+	background: #F90;
+	border: 1px solid #f90;
+	border-radius: 3px;
+	color: white;
+	font-size: 14px;
+	float: right;
+	cursor: pointer;
+	position: relative;
+
+	background-image: -moz-linear-gradient(top,  rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.2)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient(top,  rgba(255,255,255,0.2) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+	background-image: -o-linear-gradient(top,  rgba(255,255,255,0.2) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+	background-image: -ms-linear-gradient(top,  rgba(255,255,255,0.2) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+	background-image: linear-gradient(to bottom,  rgba(255,255,255,0.2) 0%,rgba(255,255,255,0) 100%); /* W3C */
+
+	box-shadow: 0 1px 3px rgba(0,0,0,.5);
+	text-shadow: 0 -1px 0 rgba(0,0,0,.3);
+}
+
+.login input[type=submit]{
+	height: 30px;
+}
+
+.main input[type=submit]:hover,
+.login input[type=submit]:hover{
+	background: #F90;
+}
+
+.main input[type=submit]:active,
+.login input[type=submit]:active{
+	top: 1px;
+}
+
+.info{
+	width: 240px;
+	background: rgba(0,0,0,.05);
+	padding: 20px;
+	float: left;
+	position: relative;
+	top: 60px;
+	border-radius: 3px;
+}
+
+.info h3{
+	font-size: 18px;
+	font-weight: normal;
+	margin-bottom: 10px;
+}
+
+.categories{
+	clear: both;
+	border-top: 1px solid #ddd;
+	padding-top: 20px;
+}
+
+.categories h3{
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px dotted #ddd;
+}
+
+.categories ul{
+	list-style: none;
+}
+
+.categories li{
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	border-bottom: 1px dotted #ddd;
+}
+
+.categories li p{}
+
+.categories li .meta{
+	color: #666;
+	font-size: 12px;
+}
+
+
+/*MEDIA QUERIES*/
+
+@media screen and (max-width: 940px){
+
+	.info{
+		float: none;
+		margin: 20px;
+		width: 580px;
+		clear: both;
+		top: 0;
+	}
+
+}
+

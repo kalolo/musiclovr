@@ -39,7 +39,7 @@ class Home extends BaseController {
         }
         $arrCategories = $this->categories->getAll();
         $this->_addViewParam('arrCategories', $arrCategories);
-        $this->_loadView('home/add_category');   
+        $this->_loadView('home/add_category', 'dashboard');   
     }
     
     public function new_post() {
@@ -71,7 +71,7 @@ class Home extends BaseController {
                 redirect(base_url() . 'post/' . $strSlug . '.html');
             }
         }
-        $this->_loadView('posts/new');
+        $this->_loadView('posts/new', 'dashboard');
     }
     
     public function profile(){
@@ -100,6 +100,6 @@ class Home extends BaseController {
         }
         $oUser = $this->users->getById($this->_getLoggedUser()->id);
         $this->_addViewParam('oUser', $oUser);
-        $this->_loadView('home/edit_profile');
+        $this->_loadView('home/edit_profile', 'dashboard');
     }
 }

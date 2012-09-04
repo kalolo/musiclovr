@@ -22,6 +22,6 @@ class Login extends BaseController {
             }
             $this->_addViewParam('error', 'No te encontramos D: .... are you drunk?..');
         }
-        $this->_loadView("login", 'ajax');
+        $this->_loadView("login", 'dashboard');
     }
 }

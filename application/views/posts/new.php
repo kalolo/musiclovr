@@ -1,39 +1,42 @@
 <?php if (null != $oActiveCategory) { ?>
-<div class="home-cat-desc block">
-    <h3>Tema en curso: <?php echo $oActiveCategory->getName(); ?></h3>
-    <p>
-    <p><?php echo $oActiveCategory->getDescription(); ?></p>
-</p>
-</div>
-<div class="post type-post status-publish format-standard hentry block">
-    <div class="post-text">
-        <!--<form id="frm_new_post" action="" method="POST">-->
-        <form action="<?php echo base_url(); ?>home/new_post" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-            <p>Titulo:<input type="text" value="" name="headline" /></p>
+
+    <section class="main">
+        <h2>Agregar Rola</h2>
+        <form action="<?php echo base_url(); ?>home/new_post" method="POST" enctype="multipart/form-data">
             <p>
-                <textarea id="text_area_post_body" name="post_body" style="width: 100%; height: 200px;">
-                ...
-                </textarea>
+                <label for="">Título:</label>
+                <input type="text"name="headline">
             </p>
-            <h4>Canción</h4><input type="file" name="song" size="20" />
-            <br /><br />
-            <input type="submit" name="add_post" value="Comparte, comparte, comparte!!" />
-            <br />
+            <p>
+                <label for="">Platícanos por qué escogiste esa rola:</label>
+                <textarea name="post_boyd" id="text_area_post_body" rows="10">...</textarea>
+            </p>
+            <p>
+                <label for="">Archivo de la rola: <i>sólo mp3, pretty please :)</i></label>
+                <input type="file" name="song" >
+            </p>
+            <p>
+                <input type="submit" name="add_post" value="¡Comparte!">
+            </p>
         </form>
-    </div>
-</div>
-<script type="text/javascript">
-//<![CDATA[
+    </section>
+    <section class="info">
+        <h3>Tema en curso: <?php echo $oActiveCategory->getName(); ?></h3>
+        <p><?php echo $oActiveCategory->getDescription(); ?></p>
+    </section>
+
+    <script type="text/javascript">
+        //<![CDATA[
         bkLib.onDomLoaded(function() { 
             //nicEditors.allTextAreas() 
             new nicEditor({
                 buttonList : ['fontSize','bold','italic','underline','strikeThrough','subscript','superscript','html','link','unlink','indent','outdent']
             }).panelInstance('text_area_post_body');
         });
-  //]]>
-</script>
+        //]]>
+    </script>
 <?php } else { ?>
-<div class="post type-post status-publish format-standard hentry block">
-    <h3>No hay tema activo :(</h3>
-</div>
+    <div class="post type-post status-publish format-standard hentry block">
+        <h3>No hay tema activo :(</h3>
+    </div>
 <?php } ?>

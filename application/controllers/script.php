@@ -24,16 +24,26 @@ class Script extends CI_Controller {
         $oActiveCat = $this->categories->getActiveCategory();
         if ($oActiveCat != null) {
             $this->_log("> Active Category: ".$oActiveCat->getName()." Termina: ".$oActiveCat->getEnds());
-            $arrAlbumData = $this->build_album($oActiveCat->getId());
+            $arrAlbumData = $this->_build_album($oActiveCat->getId());
             print_r($arrAlbumData);
-            $this->pick_new_category();
+            $oNewCategory = $this->_pick_new_category();
+            $strEmailBody = $this->_renderTemplate('emails/new_album', 
+                    array('oNewCategory' => $oNewCategory,
+                          'arrAlbumData' => $arrAlbumData)
+            );
+            echo "\n\n\n\ $strEmailBody \n\n\n\n";
+            $this->_sendEmail($this->users->getEmails(), "Greetings musiclovers!", $strEmailBody);
         } else {
             $this->_log(">> No hay categoria activa...");
         }
         exit;
     }
     
-    private function pick_new_category() {
+    public function set_new_category() {
+        $oNewCategory = $this->_pick_new_category();
+    }
+    
+    private function _pick_new_category() {
         // Primermos nos traemos todas las categorias
         $arrData = $this->categories->query("SELECT id,name FROM categories");
         $arrCategories = array();
@@ -81,7 +91,7 @@ class Script extends CI_Controller {
         exit;
     }
     
-    private function build_album($numCatId) {
+    private function _build_album($numCatId) {
         $oCat     = $this->categories->getById($numCatId);
         $this->_log(">> Building album for:". $oCat->getName());
         $arrPosts = $this->posts->getByCategory($numCatId);
