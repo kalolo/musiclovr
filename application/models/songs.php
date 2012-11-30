@@ -17,6 +17,25 @@ class songs extends BaseModel {
         return $this->db->insert_id();
     }
     
+    public function getUserSongs($numId) {
+        $arrSongs = array();
+        $this->db->select('songs.*');
+        $this->db->from('posts');
+        $this->db->join('songs',
+                'posts.song_id = songs.id',
+                'inner'
+        );
+        $this->db->where('posts.user_id', $numId);    
+        $result = $this->db->get();
+        if ($result->num_rows > 0) {
+            $arrRows = $result->result();
+            foreach ($arrRows as $oRow) {
+                $arrSongs[] = $this->_getFromDBRecord($oRow);
+            }
+        }
+        return $arrSongs;
+    }
+    
     public function getById($numId) {
         $oSong = null;
         $this->db->select('*');

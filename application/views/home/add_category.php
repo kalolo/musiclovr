@@ -9,7 +9,7 @@
     <form id="commentform" name="frm_add_category" action="" method="POST">
         <p>
             <label for="">Nombre:</label>
-            <input style="width: 200px;" type="text" value="" name="category_name" />
+            <input type="text" value="" name="category_name" />
         </p>
         <p>
             <label for="">Descripción:</label>

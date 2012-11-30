@@ -20,6 +20,7 @@
                     return $.trim($(this).text()) === ''
                 }).remove()
             });
+            $(window).load(function(){ $(".sidebar").height() > $(".main").height() ? $(".main").css("height",$(".sidebar").height() + "px") : $(".sidebar").css("height",$(".main").height() + "px") });
         </script>
         <script type="text/javascript" src="assets/js/audio-player.js"></script>  
         <script type="text/javascript">  
@@ -28,68 +29,43 @@
             });  
         </script>  
     </head>
-    <body class="home blog logged-in admin-bar">
+    <body>
 
-        <div id="wrap" class="clearfix">
-            <div id="sidebar-primary" class="block">
+        <div class="wrap">
+            <header>
+                <a href="<?php echo base_url(); ?>" title="MusicLovr" class="logo">Music Lovr</a>
+            </header>
 
-                <div class="logo">
-                    <h1><a href="<?php echo base_url(); ?>" title="Music Lovr">Music Lovr</a></h1><p>Una comunidad de amantes de la música</p>
-                </div><!--end Logo-->
+            <div class="sidebar">
+                <h3><?php echo $logged_user->firstname." ".$logged_user->lastname; ?></h3>
+                <ul id="menu-sidebar" class="menu">
+                    <li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20"><a href="<?php echo base_url(); ?>home/new_post">Subir rola</a></li>
+                    <li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20"><a href="<?php echo base_url(); ?>home/add_category">Agregar categoría</a></li>
+                    <li id="menu-item-14" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14"><a href="<?php echo base_url(); ?>home/profile">Mi perfil</a></li>
+                    <li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20"><a href="<?php echo base_url(); ?>logout/">Salir</a></li>
+                </ul>
 
+                <h3>Categorías</h3>
+                <ul> 
+                    <?php foreach ($arrActiveCategories as $oCat) { 
+                        echo '<li><a href="'.base_url().'categoria/'.$oCat->getSlug().'.html" title="'.$oCat->getDescription().'">'.$oCat->getName()."</a></li>\n";
+                     } 
+                    ?>
+                </ul>
 
-                <ul class="sidebar">
-                    <li id="nav_menu-2" class="widget-container widget_nav_menu">
-                        <h3 class="widget-title">Welcome</h3>
-                            <div class="menu-sidebar-container">
-                                <ul id="menu-sidebar" class="menu">
-                                    <li id="menu-item-14" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14"><a href="<?php echo base_url(); ?>home/profile"><?php echo $logged_user->firstname." ".$logged_user->lastname; ?></a></li>
-                                    <li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20"><a href="<?php echo base_url(); ?>home/new_post">Agregar rola</a></li>
-                                    <li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20"><a href="<?php echo base_url(); ?>home/add_category">Nueva categoria</a></li>
-                                    <li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20"><a href="<?php echo base_url(); ?>logout/">Salir!</a></li>
-                                </ul>
-                            </div>
-                    </li>
-
-                    <li id="categories-2" class="widget-container widget_categories"><h3 class="widget-title">Temas:</h3>
-                        <ul>
-                            
-                            <?php foreach ($arrActiveCategories as $oCat) { 
-                                echo '<li class="cat-item cat-item-10">
-                                         <a href="'.base_url().'categoria/'.$oCat->getSlug().'.html" title="'.$oCat->getDescription().'">'.$oCat->getName()."</a>
-                                      </li>\n";
-                             } 
-                             ?>
-                        </ul>
-                    </li>
-                    <li id="nav_menu-2" class="widget-container widget_nav_menu">
-                        <h3 class="widget-title">Links</h3>
-                        <div class="menu-sidebar-container">
-                            <ul id="menu-sidebar" class="menu">
-                                <li id="menu-item-14" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14">
-                                    <a href="<?php echo base_url(); ?>/sample-page/">Contexto y reglas</a>
-                                </li>
-                                <li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20">
-                                    <a href="<?php echo base_url(); ?>/instrucciones-para-publicar/">Instrucciones para publicar</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    </ul>
-                    <!--end Sidebar -->
+                <h3>Links</h3>
+                <ul id="menu-sidebar" class="menu">
+                    <li><a href="<?php echo base_url(); ?>/sample-page/">Contexto y reglas</a></li>
+                    <li><a href="<?php echo base_url(); ?>/instrucciones-para-publicar/">Instrucciones para publicar</a></li>
+                </ul>
             </div>
-            <!--end Sidebar One-->
-            <div id="main">
-                <div id="content">
+
+                
+            
+            <div class="main">
                     <?php echo $strContentView; ?>
-                </div>
-                <!--end Content-->
             </div>
-            <!--end Main-->
-            <div id="footer" class="clearfix">
-                <p class="alignright">Powered by Coffee and Ópera Prima.</p>
-            </div>
-            <!--end Footer-->
+            
 
         </div>
     </body>

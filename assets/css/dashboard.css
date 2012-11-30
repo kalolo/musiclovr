@@ -186,6 +186,13 @@ nav li a{
 	box-shadow: 0 1px 3px rgba(0,0,0,.2) inset;
 	color: #666;
 	font-size: 14px;
+	background: #fff;
+}
+
+.main textarea{
+	width: 618px;
+	padding: 5px 0;
+	height: 200px;
 }
 
 .main .half input[type=text],
@@ -288,6 +295,12 @@ nav li a{
 .categories li .meta{
 	color: #666;
 	font-size: 12px;
+}
+
+/*EDITOR*/
+
+.nicEdit-main{
+	background: #fff;
 }
 
 

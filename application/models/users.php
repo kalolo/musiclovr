@@ -53,6 +53,17 @@ class Users extends BaseModel {
         return null;
     }
     
+    public function getBySlug($strSlug) {
+        $this->db->select('*');
+        $this->db->where('slug', $strSlug);
+        $result = $this->db->get('users');
+        if ($result->num_rows > 0) {
+            $arrUser = $result->result();
+            return $this->_buildFromResultSet($arrUser[0]);
+        }
+        return null;
+    }
+    
     public function udpateUserSlug($numUserId) {
         $oUser = $this->getById($numUserId);
         if ($oUser != null) {
