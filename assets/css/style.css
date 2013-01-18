@@ -12,6 +12,7 @@ body{
 	margin: 0 auto;
 	overflow: hidden;
 	width: 1000px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, .6);
 }
 
 header{
@@ -80,10 +81,21 @@ header{
 	overflow: hidden;
 }
 
+.post.single{
+	border-bottom: none;
+}
+
 .post .title{
 	margin: 0 0 16px 0;
 	border-bottom: 1px solid rgba(0,0,0,.1);
 	padding-bottom: 10px;
+}
+
+.post .title .category{
+	display: block;
+	font-size: 11px;
+	font-weight: normal;
+	opacity: .6;
 }
 
 .post .title a{
@@ -93,6 +105,7 @@ header{
 .post .content{
 	float: right;
 	width: 540px;
+	min-height: 125px;
 }
 
 .post .content p:first-child{
@@ -185,6 +198,285 @@ a:hover{
 .post .footer .comments:hover,
 .post .footer .comments:hover:after{
 	background: #ad9360;
+}
+
+/* COMMENTS */
+
+.commentsblock{
+	margin: 0 0 0 -20px;
+	width: 660px;
+	padding: 20px 20px 0 20px;
+	background: red;
+	background: rgba(136, 112, 64, .1);
+	box-shadow: 0 20px 0 rgba(136, 112, 64, .1);
+}
+
+.commentlist{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+h3#comments{
+	padding-bottom: 5px;
+	margin-bottom: 0;
+	border-bottom: 1px solid #aaa;
+}
+
+.commentlist li{
+	padding: 20px 0 20px 70px;
+	border-bottom: 1px solid #DDD;
+	position: relative;
+}
+
+.commentlist li p,
+.comment-meta{
+	margin: 0 0 5px 0;
+}
+
+.commentlist .comment-body img{
+	max-width: 660px;
+	display: block;
+}
+
+.commentlist cite{
+	font-weight: bold;
+	font-style: normal;
+}
+
+.commentlist .moreinfo{
+	opacity: .5;
+}
+
+.commentlist img.avatar{
+	position: absolute;
+	top: 20px;
+	left: 0;
+}
+
+.info,
+.main > .category,
+.home-cat-desc{
+	width: 660px;
+	background: rgba(136, 112, 64, .1);
+	margin: -20px 0 20px -20px;
+	padding: 20px
+}
+
+.info h3,
+.main > .category h3,
+.home-cat-desc h3{
+	margin: 0;
+}
+
+.info p,
+.main > .category p,
+.home-cat-desc p{
+	margin: 0 0 5px 0;
+}
+
+.info p:last-child,
+.main > .category p:last-child,
+.home-cat-desc p:last-child{
+	margin: 0;
+}
+
+/* LISTA DE CATEGORÍAS */
+
+.categories h3{
+	padding-bottom: 5px;
+	margin-bottom: 0;
+	border-bottom: 1px solid #aaa;
+}
+.categories ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;	
+}
+
+.categories li{
+	padding: 20px 0;
+	border-bottom: 1px solid #DDD;
+}
+
+.categories ul h4{
+	margin: 0;
+}
+
+.categories ul p{
+	margin: 5px 0 0 0;
+}
+
+.categories ul .meta{
+	font-size: 80%;
+	opacity: .6;
+}
+
+/* FORMS */
+
+.login{
+	width: 340px;
+	margin: 100px auto;
+	overflow: hidden;
+}
+
+.login h2{
+	width: 100%;
+	padding: 124px 0 0 0;
+	margin: 0;
+	height: 0;
+	background: url(../img/musiclovr-login.png) top center no-repeat;
+	overflow: hidden;
+}
+
+.login form{
+	display: block;
+	padding: 20px;
+	overflow: hidden;
+	border-radius: 3px;
+	background: rgba(255,255,255,.9);
+}
+
+.login p{
+	float: left;
+	margin: 0;
+}
+
+.login p:last-child{
+	padding: 0 0 5px 100px;
+}
+
+.login label{
+	width: 80px;
+	display: block;
+	float: left;
+	padding: 5px 0;
+	margin-right: 20px;
+	margin-bottom: 5px;
+	clear: both;
+}
+
+.login input[type=text],
+.login input[type=password]{
+	width: 178px;
+	padding: 5px 10px;
+	border: 1px solid #aaa;
+	box-shadow: 0 1px 3px rgba(0,0,0,.2) inset;
+	color: #666;
+	font-size: 14px;
+	float: left;
+	margin-bottom: 5px;
+	position: relative;
+}
+
+.login input[type=text]:focus,
+.login input[type=password]:focus{
+	outline: none;
+	border-color: #f90;
+}
+
+
+
+
+.main form p{
+	margin-bottom: 20px;
+	clear: both;
+}
+
+.main form > p:last-child{
+	padding: 20px 0;
+	border-top: 1px solid #ddd;
+	overflow: hidden;
+	margin-bottom: 0;
+}
+
+.main form p.half{
+	width: 50%;
+	float: left;
+	box-sizing: border-box;
+	padding-right: 10px;
+}
+
+.main form p.second{
+	clear: none;
+	padding-right: 0;
+	padding-left: 10px;
+}
+
+.main label{
+	display: block;
+	line-height: 20px;
+}
+
+.main label i{
+	color: #aaa;
+}
+
+.main input[type=text],
+.main input[type=password],
+.main textarea{
+	width: 100%;
+	box-sizing: border-box;
+	padding: 5px 10px;
+	border: 1px solid #aaa;
+	box-shadow: 0 1px 3px rgba(0,0,0,.2) inset;
+	color: #666;
+	font-size: 14px;
+	background: #fff;
+}
+
+.main textarea{
+	width: 100%;
+	box-sizing: border-box;
+	padding: 5px 0;
+	height: 200px;
+}
+
+
+.main input[type=text]:focus,
+.main input[type=password]:focus,
+.main textarea:focus{
+	outline: none;
+	border-color: #f90;
+}
+
+.main input[type=submit],
+.login input[type=submit]{
+	height: 40px;
+	padding: 0 20px;
+	display: block;
+	background: #5f4c27;
+	border: 1px solid #5f4c27;
+	border-radius: 3px;
+	color: white;
+	font-size: 14px;
+	float: right;
+	cursor: pointer;
+	position: relative;
+
+	background-image: -moz-linear-gradient(top,  rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.2)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient(top,  rgba(255,255,255,0.2) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+	background-image: -o-linear-gradient(top,  rgba(255,255,255,0.2) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+	background-image: -ms-linear-gradient(top,  rgba(255,255,255,0.2) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+	background-image: linear-gradient(to bottom,  rgba(255,255,255,0.2) 0%,rgba(255,255,255,0) 100%); /* W3C */
+
+	box-shadow: 0 1px 3px rgba(0,0,0,.5);
+	text-shadow: 0 -1px 0 rgba(0,0,0,.3);
+}
+
+.login input[type=submit]{
+	height: 30px;
+}
+
+.main input[type=submit]:hover,
+.login input[type=submit]:hover{
+	background-color: #8d7035;
+}
+
+.main input[type=submit]:active,
+.login input[type=submit]:active{
+	top: 1px;
 }
 
 
