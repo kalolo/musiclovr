@@ -1,3 +1,7 @@
+#--- DH-PHP handlers ---
+#AddHandler fastcgi-script fcg fcgi fpl
+#AddHandler php-fastcgi .php
+#Action php-fastcgi /cgi-bin/dispatch.fcgi
 RewriteEngine on
 RewriteCond $1 !^(index\.php|assets|robots\.txt)
 RewriteRule ^(.*)$ index.php?$1 [L]
