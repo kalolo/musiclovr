@@ -5,6 +5,10 @@
  */
 ?>
 <section class="main">
+    <section class="info">
+        <h3>Al agregar temas:</h3>
+        <p>Intenta que sea lo suficientemente subjetivo para que cada quien se aviente un viaje. Ejemplo: es mejor "Recuerdos de la infancia" que "Canciones cantadas por payasos".</p>
+    </section>
     <h2>Agregar nuevo tema</h2>
     <form id="commentform" name="frm_add_category" action="" method="POST">
         <p>
@@ -32,8 +36,4 @@
             <?php } ?>
         </ul>
     </section>
-</section>
-<section class="info">
-    <h3>Al agregar temas:</h3>
-    <p>Intenta que sea lo suficientemente subjetivo para que cada quien se aviente un viaje. Ejemplo: es mejor "Recuerdos de la infancia" que "Canciones cantadas por payasos".</p>
 </section>

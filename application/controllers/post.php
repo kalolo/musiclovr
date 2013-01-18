@@ -16,8 +16,9 @@ class Post extends BaseController {
         if ($oPost == null) {
             redirect(base_url().'home', 'location');
         }
+        $isOwner = ($oPost->getUserId() == $this->_getLoggedUser()->id);
         $this->_addViewParam('oPost', $oPost);
+        $this->_addViewParam('isOwner', $isOwner);
         $this->_loadView('posts/full_view');
     }
-
 }

@@ -1,6 +1,10 @@
 <?php if (null != $oActiveCategory) { ?>
 
     <section class="main">
+        <section class="info">
+            <h3>Tema en curso: <?php echo $oActiveCategory->getName(); ?></h3>
+            <p><?php echo $oActiveCategory->getDescription(); ?></p>
+        </section>
         <h2>Agregar Rola</h2>
         <form action="<?php echo base_url(); ?>home/new_post" method="POST" enctype="multipart/form-data">
             <p>
@@ -9,7 +13,7 @@
             </p>
             <p>
                 <label for="">Platícanos por qué escogiste esa rola:</label>
-                <textarea name="post_boyd" id="text_area_post_body" rows="10">...</textarea>
+                <textarea name="post_body" id="text_area_post_body" rows="10">...</textarea>
             </p>
             <p>
                 <label for="">Archivo de la rola: <i>sólo mp3, pretty please :)</i></label>
@@ -20,10 +24,7 @@
             </p>
         </form>
     </section>
-    <section class="info">
-        <h3>Tema en curso: <?php echo $oActiveCategory->getName(); ?></h3>
-        <p><?php echo $oActiveCategory->getDescription(); ?></p>
-    </section>
+
 
     <script type="text/javascript">
         //<![CDATA[
@@ -36,7 +37,9 @@
         //]]>
     </script>
 <?php } else { ?>
-    <div class="post type-post status-publish format-standard hentry block">
+    <section class="main">
+        <section class="info">
         <h3>No hay tema activo :(</h3>
-    </div>
+        </section>
+    </section>
 <?php } ?>

@@ -43,7 +43,7 @@ class Home extends BaseController {
     }
     
     public function new_post() {
-        $oActiveCategory = $this->categories->getActiveCategory();
+        $oActiveCategory = $this->categories->getCurrentCategory();
         $this->_addViewParam('oActiveCategory', $oActiveCategory);
         
         if ($this->input->post('add_post') && $oActiveCategory != null) {
@@ -58,8 +58,8 @@ class Home extends BaseController {
 
                 $strHeadline = $this->input->post('headline');
                 $strBody     = $this->input->post('post_body');
-                $strNewPath = Utils::moveSong($strFileName, $strTmpPath, $oActiveCategory->getSlug());
-                
+                $strNewPath  = Utils::moveSong($strFileName, $strTmpPath, $oActiveCategory->getSlug());
+                error_log(__METHOD__." $strBody");
                 $numSongId = $this->songs->add($strFileName, $strNewPath);
                 $strSlug   = $this->posts->add(
                     $this->_getLoggedUser()->id, 
@@ -79,15 +79,20 @@ class Home extends BaseController {
         if ($this->input->post('btn_add')) {
             $strFirstname = $this->input->post('firstname');
             $strLastname  = $this->input->post('lastname');
-            $strImgUrl    = $this->input->post('image_url');
-            
+            $twitter      = $this->input->post('twitter_handler');
+            $twitter      = str_replace('@', '', trim($twitter));
+            $strImgUrl    = trim($this->input->post('profile_image_url'));
+            if (empty($strImgUrl)) {
+                $strImgUrl = Utils::getTwitterProfilePic($twitter);
+            }
             $arrUpdateData = array(
-                'firstname' => $strFirstname,
-                'lastname'  => $strLastname,
+                'firstname'         => $strFirstname,
+                'lastname'          => $strLastname,
+                'twitter_handler'   => $twitter,
                 'profile_image_url' => $strImgUrl
-             );
-            
-            if ($this->input->post('update_password')) {
+            );
+           
+            if ($this->input->post('update_password') == 1) {
                 $pass  = trim($this->input->post('password'));
                 $pass2 = trim($this->input->post('password2'));
                 if (!empty($pass) && $pass == $pass2) {
@@ -101,5 +106,44 @@ class Home extends BaseController {
         $oUser = $this->users->getById($this->_getLoggedUser()->id);
         $this->_addViewParam('oUser', $oUser);
         $this->_loadView('home/edit_profile', 'dashboard');
+    }
+    
+    
+    
+    public function editpost($postId) {
+        $this->load->model('posts');
+        $oPost = $this->posts->getById($postId);
+        if ($oPost == null || $oPost->getUserId() != $this->_getLoggedUser()->id) {
+            redirect(base_url().'home', 'location');
+        }
+        if ($this->input->post('edit_post')) {
+            $this->load->model('songs');
+            $this->load->model('categories');
+            $strHeadline = $this->input->post('headline');
+            $strBody     = $this->input->post('post_body');
+            $numSongId   = $oPost->getSongId();
+            $oCat        = $this->categories->getById(
+                    $oPost->getCategoryId()
+            );
+            if ($this->input->post('override')) {
+                if ($_FILES["song"]["error"] <= 0) {
+                    $strFileName = $_FILES["song"]["name"];
+                    $strTmpPath = $_FILES["song"]["tmp_name"];
+                    $strNewPath = Utils::moveSong(
+                        $strFileName, $strTmpPath, $oCat->getSlug()
+                    );
+                    $numSongId = $this->songs->add($strFileName, $strNewPath);
+                }
+            }
+            $this->posts->update($oPost->getId(), 
+               array('headline' => $strHeadline,
+                     'body' => $strBody,
+                     'song_id' => $numSongId
+               )
+            );
+            redirect(base_url() . 'post/' . $oPost->getSlug() . '.html');
+        }
+        $this->_addViewParam('oPost', $oPost);
+        $this->_loadView('posts/edit', 'dashboard');
     }
 }

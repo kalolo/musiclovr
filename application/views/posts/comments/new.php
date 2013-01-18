@@ -12,14 +12,13 @@
         ?>
         </ol>
         <div id="respond">
-            <h3 id="reply-title">Leave a Reply 
+            <h3 id="reply-title">¡Comenta! 
                 <small>
                     <a rel="nofollow" id="cancel-comment-reply-link" href="<?php echo base_url(); ?>post/<?php echo $oPost->getSlug(); ?>/#respond" style="display:none;">Cancel reply</a>
                 </small>
             </h3>
             <form action="<?php echo base_url(); ?>comment/add" method="post" id="commentform">
                 <p class="comment-form-comment">
-                    <label for="comment">Comment</label><br/>
                     <textarea id="comment" name="comment" rows="8" aria-required="true"></textarea>
                 </p>												
                 <p class="form-submit">

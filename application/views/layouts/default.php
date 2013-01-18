@@ -9,11 +9,6 @@
         <script charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         <script charset="utf-8" src="assets/js/nicEdit-latest.js"></script>
         <meta name='robots' content='noindex,nofollow' />
-        <style type="text/css" media="screen">
-            html { margin-top: 28px !important; }
-            * html body { margin-top: 28px !important; }
-        </style>
-
         <script charset="utf-8">
             $(function(){
                 $(".post p").filter(function() {

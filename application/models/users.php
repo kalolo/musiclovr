@@ -21,6 +21,34 @@ class Users extends BaseModel {
         }
         return $oUser;
     }
+    
+    public function getByUserName($strUserName) {
+        $oUser = null;
+        if (!empty($strUserName)) {
+            $this->db->select('*');
+            $this->db->where('username', $strUserName);
+            $result = $this->db->get('users');
+            if ($result->num_rows > 0) {
+                $arrUser = $result->result();
+                return $this->_buildFromResultSet($arrUser[0]);
+            }
+        }
+        return $oUser;
+    }
+    
+    public function getByFirstName($name) {
+        $oUser = null;
+        if (!empty($name)) {
+            $this->db->select('*');
+            $this->db->where('firstname', $name);
+            $result = $this->db->get('users');
+            if ($result->num_rows > 0) {
+                $arrUser = $result->result();
+                return $this->_buildFromResultSet($arrUser[0]);
+            }
+        }
+        return $oUser;
+    }
 
     public function getAll() {
         $arrUsers = array();
@@ -113,6 +141,7 @@ class Users extends BaseModel {
             $oUser->setProfileImageId($resultSet->profile_image_id);
             $oUser->setRoleId($resultSet->role_id);
             $oUser->setProfileImageUrl($resultSet->profile_image_url);
+            $oUser->setTwitterHandler($resultSet->twitter_handler);
         }
         return $oUser;
     }

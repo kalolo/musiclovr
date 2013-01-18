@@ -36,9 +36,10 @@ class Categories extends BaseModel {
         $this->db->from('categories');
         $this->db->join('current_category',
                 'current_category.category_id = categories.id',
-                'left'
+                'inner'
         );
         $this->db->order_by('current_category.ends','DESC');
+        $this->db->order_by('current_category.id','DESC');
         $this->db->group_by('categories.id');
         $result = $this->db->get();
         if ($result->num_rows > 0) {
@@ -97,12 +98,27 @@ class Categories extends BaseModel {
         return ($result->num_rows > 0);
     }
     
-    public function getActiveCategory() {
+    public function getCurrentCategory() {
         $oCat = null;
         $arrData = $this->query("SELECT Category.*, CurrentCategory.ends, CurrentCategory.starts
             FROM current_category CurrentCategory
             INNER JOIN categories Category ON Category.id = CurrentCategory.category_id
             WHERE CurrentCategory.ends >= NOW() 
+            AND CurrentCategory.active = 1
+            ORDER BY CurrentCategory.id DESC
+            LIMIT 1");
+        if (!empty($arrData)) {
+            $oCat =  $this->_getFromDBRecord($arrData[0]);
+        }
+        return $oCat;
+    }
+    
+    public function getActiveCategory() {
+        $oCat = null;
+        $arrData = $this->query("SELECT Category.*, CurrentCategory.ends, CurrentCategory.starts
+            FROM current_category CurrentCategory
+            INNER JOIN categories Category ON Category.id = CurrentCategory.category_id
+            WHERE CurrentCategory.active = 1
             ORDER BY CurrentCategory.id DESC
             LIMIT 1");
         if (!empty($arrData)) {
@@ -116,7 +132,8 @@ class Categories extends BaseModel {
         $this->db->insert('current_category', array(
                 'category_id' => $catId,
                 'starts'      => date('Y-m-d'),
-                'ends'        => $strEndDate
+                'ends'        => $strEndDate,
+                'active'      => 1
             )
         );
     }
@@ -158,5 +175,33 @@ class Categories extends BaseModel {
         }
         return $oCat;
     }
+    
+    public function getPendingToBeProcessed() {
+        $arrCategories = array();
+        $this->db->select('categories.*');
+        $this->db->from('categories');
+        $this->db->join('current_category',
+                'current_category.category_id = categories.id',
+                'inner'
+        );
+        $this->db->where('current_category.active','0');
+        $this->db->where('current_category.processed','0');
+        $this->db->group_by('categories.id');
+        $result = $this->db->get();
+        if ($result->num_rows > 0) {
+            $arrRows = $result->result();
+            foreach ($arrRows as $oRow) {
+                $arrCategories[] = $this->_getFromDBRecord($oRow);
+            }
+        }
+        return $arrCategories;
+    }
 
+    public function deactivate($catId) {
+        $this->db->query("UPDATE current_category SET active = 0 WHERE category_id = $catId;");
+    }
+    
+    public function flagAsProccess($catId) {
+        $this->db->query("UPDATE current_category SET processed = 1 WHERE category_id = $catId;");
+    }
 }

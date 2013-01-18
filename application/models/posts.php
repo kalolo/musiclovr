@@ -76,11 +76,14 @@ class Posts extends BaseModel {
         return $arrPosts;
     }
 
-    public function add($numUserId, $strHeadline, $strBody, $numCategoryId, $numSongId) {
+    public function add($numUserId, $strHeadline, $strBody, $numCategoryId, $numSongId, $date = false) {
         $strSlug = Utils::slugger($strHeadline);
         if ($this->slugExist($strSlug)) {
             $strSlug .= '-'.date('Y-m-d');
         }
+        $date    = ($date)
+                 ? $date
+                 : date('Y-m-d H:i:s');
         $this->db->insert('posts', array(
                 'headline'    => $strHeadline,
                 'body'        => $strBody,
@@ -88,19 +91,22 @@ class Posts extends BaseModel {
                 'category_id' => $numCategoryId,
                 'song_id'     => $numSongId,
                 'slug'        => $strSlug,
-                'created'     => date('Y-m-d H:i:s')
+                'created'     => $date
             )
         );
         return $strSlug;
     }
     
-    public function addComment($numPostId, $numUserId, $strBody) {
+    public function addComment($numPostId, $numUserId, $strBody, $date = false) {
         $strBody = Utils::parseComment($strBody);
+        $date    = ($date)
+                 ? $date
+                 : date('Y-m-d H:i:s');
         $this->db->insert('comments', array(
                 'post_id' => $numPostId,
                 'body'    => $strBody,
                 'user_id' => $numUserId,
-                'created' => date('Y-m-d H:i:s')
+                'created' => $date
             )
         );
     }
@@ -249,7 +255,7 @@ class Posts extends BaseModel {
         $oPost->setSlug($oRow->slug);
         $oPost->setCreated($oRow->created);
         $oPost->setSongId($oRow->song_id);
-        
+        $oPost->setCategoryId($oRow->category_id);
         if (isset($oRow->category_name)) {
             $oCat = new CategoryEntity();
             $oCat->setName($oRow->category_name);

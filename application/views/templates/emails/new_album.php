@@ -4,5 +4,5 @@
     </a> El &aacute;lbum del tema <?php echo $category_name; ?> ya est&aacute; listo para que lo descarguen y lo agreguen a su iTunes o administrador de m&uacute;sica de su preferencia.
 </p>
 <p>Gracias a todos por sus colaboraciones :)</p>
-<p><a href="<?php echo $album_url; ?>">Descárga el &aacute;lbum ac&aacute;.</a></p>
+<p><a href="<?php base_url()."assets/albums/".$album_url;  ?>">Descárga el &aacute;lbum ac&aacute;.</a></p>
 <p>&nbsp;</p>

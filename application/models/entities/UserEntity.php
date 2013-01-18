@@ -12,6 +12,7 @@ class UserEntity {
     private $_numProfileImageId;
     private $_strCreated;
     private $_strSlug;
+    private $_twitterHandler;
     
     private $_strProfileImageUrl;
     
@@ -127,6 +128,15 @@ class UserEntity {
         $this->_strProfileImageUrl = $val;
     }
     
+    public function setTwitterHandler($val) {
+        $this->_twitterHandler = $val;
+    }
+    
+    public function getTwitterHandler() {
+        return $this->_twitterHandler;
+    }
+
+
     public function getProfileImageUrl() {
         if (empty($this->_strProfileImageUrl)) {
             return base_url().'assets/img/default.png';
